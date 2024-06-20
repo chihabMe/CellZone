@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import 'react-loading-skeleton/dist/skeleton.css'
 import SessionLayout from "./components/layout/SessionLayout";
 import Header from "@/components/layout/Header/Header";
 

@@ -5,9 +5,9 @@ import {
   MagnifyingGlassIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import HeaderNavItem from "./HeaderNavItem";
+import UserAvatar from "./UserAvatar";
+import Link from "next/link";
 
 const links = [
   { text: "Home", href: "/" },
@@ -20,7 +20,9 @@ const Header = () => {
     <header className="flex container mx-auto items-center justify-between py-4">
       <div className="flex space-x-14 items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">CellShop</h1>
+          <h1 className="text-2xl font-bold text-gray-800">
+            <Link href={"/"}>CellShop</Link>
+          </h1>
         </div>
         <div className="bg-gray-100 flex items-center h-12 w-[500px]  space-x-2 p-2 px-4 rounded-md">
           <button className="cursor-pointer bg-transparent">
@@ -40,18 +42,15 @@ const Header = () => {
           ))}
         </ul>
       </nav>
-      <div className="flex items-center space-x-4">
-        <div>
-          <HeartIcon className="h-6 w-6" />
+      <div className="flex items-center space-x-10 ">
+        <div className="cursor-pointer">
+          <HeartIcon className="h-7 w-7 " />
         </div>
 
-        <div>
-          <ShoppingCartIcon className="h-6 w-6" />
+        <div className="cursor-pointer">
+          <ShoppingCartIcon className="h-7 w-7" />
         </div>
-
-        <div>
-          <UserCircleIcon className="h-6 w-6" />
-        </div>
+        <UserAvatar />
       </div>
     </header>
   );
