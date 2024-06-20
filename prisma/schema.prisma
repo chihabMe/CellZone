@@ -11,8 +11,29 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
+  id       String    @id @default(cuid())
   email    String
   usenrame String
   password String?
+  Product  Product[]
+}
+
+model Product {
+  id          String  @id @default(cuid())
+  name        String
+  price       Decimal
+  quantity    Int
+  description String
+  image       String
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  image    String
+  Products Product[]
 }

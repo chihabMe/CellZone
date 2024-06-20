@@ -7,40 +7,50 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
-const categories = [
-  {
-    name: "phones",
-    image: "/images/phone-icon.png",
-    href: "products?category=phones",
-  },
-  {
-    name: "smart watches",
-    image: "/images/watch-icon.png",
-    href: "products?category=watch",
-  },
-  {
-    name: "headphones",
-    image: "/images/headphone-icon.png",
-    href: "products?category=headphones",
-  },
+import { Category } from "@prisma/client";
+// const categories = [
+//   {
+//     name: "phones",
+//     image: "/images/phone-icon.png",
+//     href: "products?category=phones",
+//   },
+//   {
+//     name: "smart watches",
+//     image: "/images/watch-icon.png",
+//     href: "products?category=watch",
+//   },
+//   {
+//     name: "headphones",
+//     image: "/images/headphone-icon.png",
+//     href: "products?category=headphones",
+//   },
 
-  {
-    name: "cameras",
-    image: "/images/camera-icon.png",
-    href: "products?category=cameras",
-  },
-  {
-    name: "computers",
-    image: "/images/computer-icon.png",
-    href: "products?category=computers",
-  },
-  {
-    name: "gaming",
-    image: "/images/gaming-icon.png",
-    href: "products?category=gaming",
-  },
-];
-const Categories = () => {
+//   {
+//     name: "cameras",
+//     image: "/images/camera-icon.png",
+//     href: "products?category=cameras",
+//   },
+//   {
+//     name: "computers",
+//     image: "/images/computer-icon.png",
+//     href: "products?category=computers",
+//   },
+//   {
+//     name: "gaming",
+//     image: "/images/gaming-icon.png",
+//     href: "products?category=gaming",
+//   },
+// ];
+const getCategories = async (): Promise<Category[]> => {
+  const response = await fetch("http://localhost:3000/api/categories", {
+    method: "GET",
+    cache: "force-cache",
+  });
+  if (!response.ok) throw new Error("failed to fetch categories");
+  return response.json();
+};
+const Categories = async () => {
+  const categories = await getCategories();
   return (
     <section className="py-10">
       <div className="container max-w-screen-xl mx-auto">
@@ -60,7 +70,7 @@ const Categories = () => {
           {categories.map((category) => (
             <CategoryItem
               key={category.name}
-              href={category.href}
+              href={category.name}
               name={category.name}
               image={category.image}
             />

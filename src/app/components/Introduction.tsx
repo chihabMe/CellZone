@@ -40,7 +40,7 @@ const Introduction = () => {
 
                 <h2 className="text-gray-800 text-2xl font-bold">Max</h2>
                 <p className="text-gray-600">
-                  Computational audio. Listen, it's powerful
+                  Computational audio. Listen, its powerful
                 </p>
               </div>
             </div>

@@ -1,16 +1,23 @@
-import { Hono } from "hono";
+import { Context, Hono } from "hono";
 import { authHandler, initAuthConfig, verifyAuth } from "@hono/auth-js";
 import { db } from "@/lib/db";
 import { authOptions } from "@/lib/auth";
 import { User } from "@prisma/client";
+import { categoriesApp } from "./categories";
+import { productsApp } from "./products";
 
-type Variables = {
-  db: typeof db;
-  user?: User;
+declare module "hono" {
+  interface ContextVariableMap {
+    db: typeof db;
+  }
+}
+type Env = {
+  Variables: {
+    db: typeof db;
+    user?: User;
+  };
 };
-const app = new Hono<{
-  Variables: Variables;
-}>().basePath("/");
+const app = new Hono<Env>().basePath("/");
 
 // app.use(
 //   "*",
@@ -35,7 +42,7 @@ app.use(
 
 app.use("/api/auth/*", authHandler());
 
-app.use("/api/*", verifyAuth());
+// app.use("/api/*", verifyAuth());
 
 app.get("/api/protected", async (c) => {
   const auth = c.get("authUser");
@@ -46,5 +53,8 @@ app.get("/api/users", async (c) => {
   const users = await db.user.findMany();
   return c.json(users);
 });
+
+app.route("/api/categories", categoriesApp);
+app.route("/api/products", productsApp);
 
 export default app;

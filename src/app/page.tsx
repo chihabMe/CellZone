@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Hero from "./components/Hero";
 import Introduction from "./components/Introduction";
 import Categories from "./components/Categories";
+import Products from "./components/Products";
 
 export const metadata: Metadata = {
   title: "CellShope",
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <Introduction />
       <Categories />
+      <Products />
     </main>
   );
 }
