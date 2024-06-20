@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Button from "@/components/ui/Button";
 
 const Hero = () => {
   return (
@@ -16,9 +17,7 @@ const Hero = () => {
             Created to change everything for the better. For everyone
           </p>
           <Link href="/products ">
-            <button className="px-12 mt-4  py-3.5 rounded-md bg-transparent text-white font-bold ring-2 ring-gray-400">
-              Shope Now
-            </button>
+            <Button>Shope Now</Button>
           </Link>
         </div>
         <div>

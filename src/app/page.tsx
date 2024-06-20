@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Hero from "./components/Hero";
+import Introduction from "./components/Introduction";
 
 export const metadata: Metadata = {
   title: "CellShope",
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <Introduction />
     </main>
   );
 }
