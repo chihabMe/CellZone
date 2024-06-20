@@ -1,7 +1,14 @@
-"use client";
-import { useSession } from "@hono/auth-js/react";
+import { Metadata } from "next";
+import Hero from "./components/Hero";
 
-export default  function Home() {
-  const session = useSession();
-  return <main>{JSON.stringify(session)}</main>;
+export const metadata: Metadata = {
+  title: "CellShope",
+  description: "CellShope is a platform for buying and selling mobile phones",
+};
+export default function Home() {
+  return (
+    <main>
+      <Hero />
+    </main>
+  );
 }
