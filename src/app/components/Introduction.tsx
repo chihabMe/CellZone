@@ -9,15 +9,16 @@ const Introduction = () => {
       <div className="container flex flex-col lg:flex-row   mx-auto ">
         
         <div className="w-full lg:w-1/2 ">
-          <div className="flex  bg-white  justify-between items-center">
+          <div className="flex min-h-[220px] px-4 md:px-0  bg-white  justify-between items-center">
             <Image
               src={"/images/playstation.png"}
               alt="playstation"
+              className=" !w-[150px] !h-[150px] md:w-[350px] md:h-[350px]"
               width={350}
               height={350}
             />
             <div className="max-w-[400px] flex flex-col space-y-4">
-              <h2 className="text-black font-medium text-4xl">Playstation 5</h2>
+              <h2 className="text-black font-medium text-2xl md:text-4xl">Playstation 5</h2>
               <p className="text-gray-500 font-medium">
                 Incredibly powerful CPUs, GPUs, and an SSD with integrated I/O
                 will redefine your PlayStation experience.

@@ -24,7 +24,7 @@ const Header = () => {
             <Link href={"/"}>CellShop</Link>
           </h1>
         </div>
-        <div className="bg-gray-100 flex items-center h-12 w-[500px]  space-x-2 p-2 px-4 rounded-md">
+        <div className="bg-gray-100 hidden md:flex items-center h-12 w-[500px]  space-x-2 p-2 px-4 rounded-md">
           <button className="cursor-pointer bg-transparent">
             <MagnifyingGlassIcon className="h-6 w-6 " />
           </button>
@@ -35,7 +35,7 @@ const Header = () => {
           />
         </div>
       </div>
-      <nav>
+      <nav className="hidden md:block">
         <ul className="flex space-x-12">
           {links.map((link) => (
             <HeaderNavItem key={link.text} text={link.text} href={link.href} />
