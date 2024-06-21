@@ -51,7 +51,7 @@ const getCategories = async (): Promise<Category[]> => {
     cache: "force-cache",
   });
   if (!response.ok) {
-    console.log(url);
+    console.error(url);
     console.error(response.status);
     console.error(response.statusText);
     console.error(response.body);
