@@ -1,36 +1,49 @@
 import ProductCard from "@/components/ui/ProductCard";
-import { Product } from "@prisma/client";
+import { Prisma, Product } from "@prisma/client";
 import * as Tabs from "@radix-ui/react-tabs";
 import ClientMotion from "./ClientMotion";
+import { db } from "@/lib/db";
 let host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
 if (!host.includes("https")) host = "https://" + host;
 
-const getProducts = async (url: string): Promise<Product[]> => {
-  const response = await fetch(url, {
-    method: "GET",
-    cache: "no-cache",
+const getProducts = async (
+  where: Prisma.ProductWhereInput
+): Promise<Product[]> => {
+  return db.product.findMany({
+    where,
   });
-  if (!response.ok) {
-    console.error("url", url);
-    console.error(response.status);
-    console.error(response.statusText);
-    console.error(response.body);
-    throw new Error("can't fetch the products");
-  }
-  return response.json();
+  // const response = await fetch(url, {
+  //   method: "GET",
+  //   cache: "no-cache",
+  // });
+  // if (!response.ok) {
+  //   console.error("url", url);
+  //   console.error(response.status);
+  //   console.error(response.statusText);
+  //   console.error(response.body);
+  //   throw new Error("can't fetch the products");
+  // }
+  // return response.json();
 };
-const tabs = [
+const tabs: {
+  name: string;
+  where: Prisma.ProductWhereInput;
+}[] = [
   {
     name: "New Arrival",
-    url: host + "/api/products",
+    where: {},
   },
   {
     name: "Bestseller",
-    url: host + "/api/products/bestseller",
+    where: {
+      isBestseller: true,
+    },
   },
   {
     name: "Featured Products",
-    url: host + "/api/products/featured",
+    where: {
+      isFeatured: true,
+    },
   },
 ];
 const Products = async () => {
@@ -54,7 +67,7 @@ const Products = async () => {
         <div className="py-4"></div>
         {tabs.map((tab) => (
           <Tabs.Content key={"content_" + tab.name} value={`tab_${tab.name}`}>
-            <ProductsList url={tab.url} title={tab.name} />
+            <ProductsList where={tab.where} title={tab.name} />
           </Tabs.Content>
         ))}
       </Tabs.Root>
@@ -62,8 +75,11 @@ const Products = async () => {
   );
 };
 
-const ProductsList = async (props: { url: string; title: string }) => {
-  const products = await getProducts(props.url);
+const ProductsList = async (props: {
+  where: Prisma.ProductWhereInput;
+  title: string;
+}) => {
+  const products = await getProducts(props.where);
   return (
     <div>
       <div className=" px-2 container mx-auto max-w-screen-xl gap-4 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

@@ -7,6 +7,7 @@ import {
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import { Category } from "@prisma/client";
+import { db } from "@/lib/db";
 
 let host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
 if (!host.includes("https")) host = "https://" + host;
@@ -45,19 +46,21 @@ if (!host.includes("https")) host = "https://" + host;
 //   },
 // ];
 const getCategories = async (): Promise<Category[]> => {
-  const url = `${host}/api/categories`;
-  const response = await fetch(url, {
-    method: "GET",
-    cache: "force-cache",
-  });
-  if (!response.ok) {
-    console.error(url);
-    console.error(response.status);
-    console.error(response.statusText);
-    console.error(response.body);
-    throw new Error("failed to fetch categories");
-  }
-  return response.json();
+  return db.category.findMany()
+  
+  // const url = `${host}/api/categories`;
+  // const response = await fetch(url, {
+  //   method: "GET",
+  //   cache: "force-cache",
+  // });
+  // if (!response.ok) {
+  //   console.error(url);
+  //   console.error(response.status);
+  //   console.error(response.statusText);
+  //   console.error(response.body);
+  //   throw new Error("failed to fetch categories");
+  // }
+  // return response.json();
 };
 const Categories = async () => {
   const categories = await getCategories();
