@@ -2,7 +2,8 @@ import ProductCard from "@/components/ui/ProductCard";
 import { Product } from "@prisma/client";
 import * as Tabs from "@radix-ui/react-tabs";
 import ClientMotion from "./ClientMotion";
-const host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
+let host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
+if (!host.includes("https")) host = "https://" + host;
 
 const getProducts = async (url: string): Promise<Product[]> => {
   const response = await fetch(url, {
