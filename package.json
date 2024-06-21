@@ -12,6 +12,8 @@
     "@auth/core": "^0.32.0",
     "@heroicons/react": "^2.1.4",
     "@hono/auth-js": "^1.0.8",
+    "@libsql/client": "^0.6.2",
+    "@prisma/adapter-libsql": "^5.15.1",
     "@prisma/client": "^5.15.1",
     "@radix-ui/react-tabs": "^1.1.0",
     "bcrypt": "^5.1.1",

@@ -2,6 +2,7 @@ import ProductCard from "@/components/ui/ProductCard";
 import { Product } from "@prisma/client";
 import * as Tabs from "@radix-ui/react-tabs";
 import ClientMotion from "./ClientMotion";
+const host = process.env.VERCEL_URL ?? "http://localhost:3000";
 const getProducts = async (url: string): Promise<Product[]> => {
   const response = await fetch(url, {
     method: "GET",
@@ -13,15 +14,15 @@ const getProducts = async (url: string): Promise<Product[]> => {
 const tabs = [
   {
     name: "New Arrival",
-    url: "http://localhost:3000/api/products",
+    url: host + "/api/products",
   },
   {
     name: "Bestseller",
-    url: "http://localhost:3000/api/products/bestseller",
+    url: host + "/api/products/bestseller",
   },
   {
     name: "Featured Products",
-    url: "http://localhost:3000/api/products/featured",
+    url: host + "/api/products/featured",
   },
 ];
 const Products = async () => {
@@ -59,7 +60,7 @@ const ProductsList = async (props: { url: string; title: string }) => {
     <div>
       <div className=" px-2 container mx-auto max-w-screen-xl gap-4 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product, idx) => (
-          <ClientMotion idx={idx}>
+          <ClientMotion key={"home_product_card_" + product.id} idx={idx}>
             <ProductCard key={product.id} product={product} />
           </ClientMotion>
         ))}
