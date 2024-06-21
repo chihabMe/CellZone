@@ -7,6 +7,10 @@ import {
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import { Category } from "@prisma/client";
+
+let host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
+if (!host.includes("https")) host = "https://" + host;
+
 // const categories = [
 //   {
 //     name: "phones",
@@ -41,7 +45,7 @@ import { Category } from "@prisma/client";
 //   },
 // ];
 const getCategories = async (): Promise<Category[]> => {
-  const response = await fetch("http://localhost:3000/api/categories", {
+  const response = await fetch(`${host}/api/categories`, {
     method: "GET",
     cache: "force-cache",
   });
