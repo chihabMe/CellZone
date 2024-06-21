@@ -10,7 +10,12 @@ const getProducts = async (url: string): Promise<Product[]> => {
     method: "GET",
     cache: "no-cache",
   });
-  if (!response.ok) throw new Error("can't fetch the products");
+  if (!response.ok) {
+    console.error(response.status);
+    console.error(response.statusText);
+    console.error(response.body);
+    throw new Error("can't fetch the products");
+  }
   return response.json();
 };
 const tabs = [

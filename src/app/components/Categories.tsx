@@ -49,7 +49,12 @@ const getCategories = async (): Promise<Category[]> => {
     method: "GET",
     cache: "force-cache",
   });
-  if (!response.ok) throw new Error("failed to fetch categories");
+  if (!response.ok) {
+    console.error(response.status);
+    console.error(response.statusText);
+    console.error(response.body);
+    throw new Error("failed to fetch categories");
+  }
   return response.json();
 };
 const Categories = async () => {
