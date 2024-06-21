@@ -11,6 +11,8 @@ const getProducts = async (url: string): Promise<Product[]> => {
     cache: "no-cache",
   });
   if (!response.ok) {
+
+    console.log(url);
     console.error(response.status);
     console.error(response.statusText);
     console.error(response.body);

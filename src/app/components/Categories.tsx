@@ -45,11 +45,13 @@ if (!host.includes("https")) host = "https://" + host;
 //   },
 // ];
 const getCategories = async (): Promise<Category[]> => {
-  const response = await fetch(`${host}/api/categories`, {
+  const url = `${host}/api/categories`;
+  const response = await fetch(url, {
     method: "GET",
     cache: "force-cache",
   });
   if (!response.ok) {
+    console.log(url);
     console.error(response.status);
     console.error(response.statusText);
     console.error(response.body);
