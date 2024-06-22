@@ -29,6 +29,9 @@ importers:
       adminjs:
         specifier: ^7.7.2
         version: 7.8.1(@types/react@18.3.3)
+      bcrypt:
+        specifier: ^5.1.1
+        version: 5.1.1
       db:
         specifier: workspace:*
         version: link:../../packages/db
@@ -48,6 +51,9 @@ importers:
         specifier: latest
         version: 5.1.7
     devDependencies:
+      '@types/bcrypt':
+        specifier: ^5.0.2
+        version: 5.0.2
       '@types/body-parser':
         specifier: ^1.19.5
         version: 1.19.5
