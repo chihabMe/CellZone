@@ -9,7 +9,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "generate": "pnpm prisma generate"
   },
   "keywords": [],
   "author": "",
