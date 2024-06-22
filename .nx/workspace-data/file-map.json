@@ -11,8 +11,8 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": ".gitignore",
-        "hash": "15751075988610075934"
+        "file": "package.json",
+        "hash": "12453323535199349209"
       },
       {
         "file": ".vscode/settings.json",
@@ -27,158 +27,15 @@
         "hash": "2320187736902498180"
       },
       {
-        "file": "package.json",
-        "hash": "12453323535199349209"
-      },
-      {
         "file": "nx.json",
         "hash": "15620374024069166064"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "2938840901397271603"
       }
     ],
     "projectFileMap": {
-      "admin": [
-        {
-          "file": "apps/admin/.adminjs/bundle.js",
-          "hash": "1441480052852526719"
-        },
-        {
-          "file": "apps/admin/.adminjs/entry.js",
-          "hash": "4020892149964745890"
-        },
-        {
-          "file": "apps/admin/.env",
-          "hash": "6071849122565510750"
-        },
-        {
-          "file": "apps/admin/.eslintrc.cjs",
-          "hash": "8558970214239494520"
-        },
-        {
-          "file": "apps/admin/.gitignore",
-          "hash": "15751075988610075934"
-        },
-        {
-          "file": "apps/admin/.prettierrc",
-          "hash": "15617158417289742125"
-        },
-        {
-          "file": "apps/admin/dist/admin/auth-provider.js",
-          "hash": "9052793810070276039"
-        },
-        {
-          "file": "apps/admin/dist/admin/component-loader.js",
-          "hash": "7192026196789603048"
-        },
-        {
-          "file": "apps/admin/dist/admin/constants.js",
-          "hash": "15974345940519622741"
-        },
-        {
-          "file": "apps/admin/dist/admin/options.js",
-          "hash": "4722562550743415764"
-        },
-        {
-          "file": "apps/admin/dist/app.js",
-          "hash": "16035241301323282066"
-        },
-        {
-          "file": "apps/admin/dist/db/index.js",
-          "hash": "3914487595150969148"
-        },
-        {
-          "file": "apps/admin/dist/tsconfig.tsbuildinfo",
-          "hash": "2294520072359492231"
-        },
-        {
-          "file": "apps/admin/nodemon.json",
-          "hash": "3597369045454669641"
-        },
-        {
-          "file": "apps/admin/package.json",
-          "hash": "12888771573420902636",
-          "deps": [
-            "npm:@types/bcrypt",
-            "npm:@types/body-parser",
-            "npm:@types/connect",
-            "npm:@types/estree",
-            "npm:@types/express",
-            "npm:@types/express-serve-static-core",
-            "npm:@types/hoist-non-react-statics",
-            "npm:@types/http-errors",
-            "npm:@types/json-schema",
-            "npm:@types/json5@2.2.0",
-            "npm:@types/mime@4.0.0",
-            "npm:@types/node@18.19.39",
-            "npm:@types/parse-json",
-            "npm:@types/prop-types",
-            "npm:@types/qs",
-            "npm:@types/range-parser",
-            "npm:@types/react",
-            "npm:@types/react-transition-group",
-            "npm:@types/resolve@1.20.6",
-            "npm:@types/semver",
-            "npm:@types/send",
-            "npm:@types/serve-static",
-            "npm:@types/use-sync-external-store@0.0.6",
-            "npm:@typescript-eslint/eslint-plugin",
-            "npm:@typescript-eslint/parser",
-            "npm:dotenv-cli",
-            "npm:eslint",
-            "npm:eslint-config-airbnb",
-            "npm:eslint-plugin-import",
-            "npm:eslint-plugin-jsx-a11y",
-            "npm:eslint-plugin-prettier",
-            "npm:eslint-plugin-react",
-            "npm:eslint-plugin-react-hooks",
-            "npm:nodemon",
-            "npm:prettier",
-            "npm:ts-node",
-            "npm:tsconfig-paths@4.2.0",
-            "npm:tslib@2.6.3",
-            "npm:typescript",
-            "npm:@adminjs/express",
-            "npm:@adminjs/prisma",
-            "npm:@libsql/client",
-            "npm:@prisma/adapter-libsql",
-            "npm:adminjs",
-            "npm:bcrypt",
-            "db",
-            "npm:dotenv@16.4.5",
-            "npm:express",
-            "npm:express-formidable",
-            "npm:express-session",
-            "npm:sqlite3"
-          ]
-        },
-        {
-          "file": "apps/admin/src/admin/auth-provider.ts",
-          "hash": "6263360855218622222"
-        },
-        {
-          "file": "apps/admin/src/admin/component-loader.ts",
-          "hash": "8429371569115757635"
-        },
-        {
-          "file": "apps/admin/src/admin/constants.ts",
-          "hash": "15125173776606666605"
-        },
-        {
-          "file": "apps/admin/src/admin/options.ts",
-          "hash": "560376102439914390"
-        },
-        {
-          "file": "apps/admin/src/app.ts",
-          "hash": "10745017694899640777"
-        },
-        {
-          "file": "apps/admin/src/db/index.ts",
-          "hash": "2041273748224269834"
-        },
-        {
-          "file": "apps/admin/tsconfig.json",
-          "hash": "454130068121443995"
-        }
-      ],
       "db": [
         {
           "file": "packages/db/.env",
@@ -440,11 +297,11 @@
         },
         {
           "file": "apps/web/src/app/layout.tsx",
-          "hash": "1081692362068032428"
+          "hash": "4022375012734811658"
         },
         {
           "file": "apps/web/src/app/page.tsx",
-          "hash": "7498400071696796601"
+          "hash": "7598247623323276255"
         },
         {
           "file": "apps/web/src/components/layout/Header/Header.tsx",
@@ -517,6 +374,193 @@
         {
           "file": "apps/web/tsconfig.json",
           "hash": "4320684160905164141"
+        },
+        {
+          "file": "apps/web/public/images/footer-banner.png",
+          "hash": "16867340558117516772"
+        },
+        {
+          "file": "apps/web/src/app/components/SumerSale.tsx",
+          "hash": "7738207543858944725"
+        },
+        {
+          "file": "apps/web/src/app/components/SummerSale.tsx",
+          "hash": "7083948614438473109"
+        },
+        {
+          "file": "apps/web/src/components/layout/Footer.tsx",
+          "hash": "13115600162051841024"
+        },
+        {
+          "file": "apps/web/public/images/Facebook.png",
+          "hash": "15666416355481531338"
+        },
+        {
+          "file": "apps/web/public/images/Tiktok.png",
+          "hash": "3736959671101794674"
+        },
+        {
+          "file": "apps/web/public/images/Instagram.png",
+          "hash": "16564672744050276823"
+        },
+        {
+          "file": "apps/web/public/images/Twitter.png",
+          "hash": "15042242455047251697"
+        },
+        {
+          "file": "apps/web/public/images/tiktok.png",
+          "hash": "3736959671101794674"
+        },
+        {
+          "file": "apps/web/public/images/twitter.png",
+          "hash": "15042242455047251697"
+        },
+        {
+          "file": "apps/web/public/images/facebook.png",
+          "hash": "15666416355481531338"
+        },
+        {
+          "file": "apps/web/public/images/instagram.png",
+          "hash": "16564672744050276823"
+        }
+      ],
+      "admin": [
+        {
+          "file": "apps/admin/.adminjs/bundle.js",
+          "hash": "1441480052852526719"
+        },
+        {
+          "file": "apps/admin/.adminjs/entry.js",
+          "hash": "4020892149964745890"
+        },
+        {
+          "file": "apps/admin/.env",
+          "hash": "6071849122565510750"
+        },
+        {
+          "file": "apps/admin/.eslintrc.cjs",
+          "hash": "8558970214239494520"
+        },
+        {
+          "file": "apps/admin/.gitignore",
+          "hash": "15751075988610075934"
+        },
+        {
+          "file": "apps/admin/.prettierrc",
+          "hash": "15617158417289742125"
+        },
+        {
+          "file": "apps/admin/dist/admin/auth-provider.js",
+          "hash": "9052793810070276039"
+        },
+        {
+          "file": "apps/admin/dist/admin/component-loader.js",
+          "hash": "7192026196789603048"
+        },
+        {
+          "file": "apps/admin/dist/admin/constants.js",
+          "hash": "15974345940519622741"
+        },
+        {
+          "file": "apps/admin/dist/admin/options.js",
+          "hash": "11839763375306230086"
+        },
+        {
+          "file": "apps/admin/dist/app.js",
+          "hash": "16035241301323282066"
+        },
+        {
+          "file": "apps/admin/dist/db/index.js",
+          "hash": "3914487595150969148"
+        },
+        {
+          "file": "apps/admin/nodemon.json",
+          "hash": "3597369045454669641"
+        },
+        {
+          "file": "apps/admin/package.json",
+          "hash": "12888771573420902636",
+          "deps": [
+            "npm:@types/bcrypt",
+            "npm:@types/body-parser",
+            "npm:@types/connect",
+            "npm:@types/estree",
+            "npm:@types/express",
+            "npm:@types/express-serve-static-core",
+            "npm:@types/hoist-non-react-statics",
+            "npm:@types/http-errors",
+            "npm:@types/json-schema",
+            "npm:@types/json5@2.2.0",
+            "npm:@types/mime@4.0.0",
+            "npm:@types/node@18.19.39",
+            "npm:@types/parse-json",
+            "npm:@types/prop-types",
+            "npm:@types/qs",
+            "npm:@types/range-parser",
+            "npm:@types/react",
+            "npm:@types/react-transition-group",
+            "npm:@types/resolve@1.20.6",
+            "npm:@types/semver",
+            "npm:@types/send",
+            "npm:@types/serve-static",
+            "npm:@types/use-sync-external-store@0.0.6",
+            "npm:@typescript-eslint/eslint-plugin",
+            "npm:@typescript-eslint/parser",
+            "npm:dotenv-cli",
+            "npm:eslint",
+            "npm:eslint-config-airbnb",
+            "npm:eslint-plugin-import",
+            "npm:eslint-plugin-jsx-a11y",
+            "npm:eslint-plugin-prettier",
+            "npm:eslint-plugin-react",
+            "npm:eslint-plugin-react-hooks",
+            "npm:nodemon",
+            "npm:prettier",
+            "npm:ts-node",
+            "npm:tsconfig-paths@4.2.0",
+            "npm:tslib@2.6.3",
+            "npm:typescript",
+            "npm:@adminjs/express",
+            "npm:@adminjs/prisma",
+            "npm:@libsql/client",
+            "npm:@prisma/adapter-libsql",
+            "npm:adminjs",
+            "npm:bcrypt",
+            "db",
+            "npm:dotenv@16.4.5",
+            "npm:express",
+            "npm:express-formidable",
+            "npm:express-session",
+            "npm:sqlite3"
+          ]
+        },
+        {
+          "file": "apps/admin/src/admin/auth-provider.ts",
+          "hash": "6263360855218622222"
+        },
+        {
+          "file": "apps/admin/src/admin/component-loader.ts",
+          "hash": "8429371569115757635"
+        },
+        {
+          "file": "apps/admin/src/admin/constants.ts",
+          "hash": "15125173776606666605"
+        },
+        {
+          "file": "apps/admin/src/admin/options.ts",
+          "hash": "15480179630046779780"
+        },
+        {
+          "file": "apps/admin/src/app.ts",
+          "hash": "10745017694899640777"
+        },
+        {
+          "file": "apps/admin/src/db/index.ts",
+          "hash": "2041273748224269834"
+        },
+        {
+          "file": "apps/admin/tsconfig.json",
+          "hash": "454130068121443995"
         }
       ]
     }

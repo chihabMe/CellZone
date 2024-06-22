@@ -1,8 +1,8 @@
 {
   "run": {
-    "command": "nx dev admin",
-    "startTime": "2024-06-22T18:57:59.514Z",
-    "endTime": "2024-06-22T18:58:04.833Z",
+    "command": "nx dev web",
+    "startTime": "2024-06-22T21:02:36.410Z",
+    "endTime": "2024-06-22T21:54:42.136Z",
     "inner": false
   },
   "tasks": [
@@ -10,23 +10,23 @@
       "taskId": "db:build",
       "target": "build",
       "projectName": "db",
-      "hash": "11434852258606889904",
-      "startTime": "2024-06-22T18:57:59.537Z",
-      "endTime": "2024-06-22T18:57:59.563Z",
+      "hash": "345128556468086236",
+      "startTime": "2024-06-22T21:02:36.419Z",
+      "endTime": "2024-06-22T21:02:36.432Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
     },
     {
-      "taskId": "admin:dev",
+      "taskId": "web:dev",
       "target": "dev",
-      "projectName": "admin",
-      "hash": "7176194409296527846",
-      "startTime": "2024-06-22T18:57:59.574Z",
-      "endTime": "2024-06-22T18:58:04.832Z",
+      "projectName": "web",
+      "hash": "6929377271208615069",
+      "startTime": "2024-06-22T21:02:36.437Z",
+      "endTime": "2024-06-22T21:54:42.136Z",
       "params": "",
       "cacheStatus": "cache-miss",
-      "status": 1
+      "status": 0
     }
   ]
 }

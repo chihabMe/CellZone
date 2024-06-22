@@ -4,6 +4,7 @@ import "./globals.css";
 import 'react-loading-skeleton/dist/skeleton.css'
 import SessionLayout from "../layout/SessionLayout";
 import Header from "@/components/layout/Header/Header";
+import Footer from "@/components/layout/Footer";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <body >
           <Header />
           {children}
+          <Footer/>
         </body>
       </html>
     </SessionLayout>

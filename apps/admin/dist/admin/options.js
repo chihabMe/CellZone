@@ -15,7 +15,9 @@ const options = {
         },
         {
             resource: { model: getModelByName('Product'), client: prisma },
-            options: {},
+            options: {
+                listProperties: ['id', 'name', 'price', 'quantity', 'createdAt', 'updatedAt'],
+            },
         },
     ],
     databases: [],
