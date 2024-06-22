@@ -1,0 +1,13 @@
+
+> web@0.1.0 dev /home/user/Documents/learn/templates/nextauth-hono/apps/web
+> next dev
+
+  [1m[38;2;173;127;168m▲ Next.js 14.2.4[39m[22m
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ [32m[1m✓[22m[39m Starting...
+[33m [33m[1m⚠[22m[39m Invalid next.config.mjs options detected: [39m
+[33m [33m[1m⚠[22m[39m     Unrecognized key(s) in object: 'serverComponentsExternalPackages'[39m
+[33m [33m[1m⚠[22m[39m See more info here: https://nextjs.org/docs/messages/invalid-next-config[39m
+^C[?25h

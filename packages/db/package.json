@@ -1,6 +1,7 @@
 {
   "name": "db",
   "version": "1.0.0",
+  "private": true,
   "exports": {
     ".": "./dist/index.js"
   },
@@ -9,7 +10,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "pnpm prisma generate"
+    "build": "pnpm prisma generate && tsc "
   },
   "keywords": [],
   "author": "",

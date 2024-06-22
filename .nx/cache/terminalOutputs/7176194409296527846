@@ -1,0 +1,25 @@
+
+> admin@1.0.0 dev /home/user/Documents/learn/templates/nextauth-hono/apps/admin
+> pnpm build && pnpm start
+
+
+> admin@1.0.0 build /home/user/Documents/learn/templates/nextauth-hono/apps/admin
+> tsc
+
+^Cgit 
+> admin@1.0.0 start /home/user/Documents/learn/templates/nextauth-hono/apps/admin
+> pnpm dotenv -c '.env' -- node dist/app
+
+add file:///home/user/Documents/learn/templates/nextauth-hono/node_modules/.pnpm/adminjs@7.8.1_@types+react-dom@18.3.0_@types+react@18.3.3_encoding@0.1.13/node_modules/adminjs/lib/locale/index.js:1
+import deLocale from './de/translation.json' assert { type: 'json' };
+                                             ^^^^^^
+
+SyntaxError: Unexpected identifier 'assert'
+[90m    at compileSourceTextModule (node:internal/modules/esm/utils:337:16)[39m
+[90m    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:164:18)[39m
+[90m    at callTranslator (node:internal/modules/esm/loader:429:14)[39m
+[90m    at ModuleLoader.moduleProvider (node:internal/modules/esm/loader:435:30)[39m
+
+Node.js v22.3.0
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

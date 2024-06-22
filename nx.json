@@ -1,0 +1,15 @@
+{
+  "targetDefaults": {
+    "build": {
+      "cache": true,
+      "inputs": ["{projectRoot}/**/*", "!{projectRoot}/**/*.md"],
+      "dependsOn": ["build","^build"]
+    },
+    "dev": {
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "cache": true
+    }
+  }
+}
