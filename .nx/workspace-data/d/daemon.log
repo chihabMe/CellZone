@@ -719,3 +719,12 @@ Error: write EPIPE
 [NX Daemon Server] - 2024-06-22T18:58:04.832Z - Done responding to the client recordOutputsHash
 [NX Daemon Server] - 2024-06-22T18:58:04.832Z - Handled RECORD_OUTPUTS_HASH. Handling time: 1. Response time: 0.
 [NX Daemon Server] - 2024-06-22T18:58:04.845Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-06-22T18:58:37.146Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-06-22T18:58:37.148Z - [WATCHER]: .gitignore was modified
+[NX Daemon Server] - 2024-06-22T18:58:37.149Z - [REQUEST]: Responding to the client. File watch changed
+[NX Daemon Server] - 2024-06-22T18:58:37.149Z - Done responding to the client File watch changed
+[NX Daemon Server] - 2024-06-22T18:58:37.149Z - Handled FILE-WATCH-CHANGED. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-06-22T18:58:37.149Z - Time taken for 'changed-projects' 0.07645399996545166ms
+[NX Daemon Server] - 2024-06-22T18:58:37.149Z - [WATCHER]: Stopping the watcher for /home/user/Documents/learn/templates/nextauth-hono (sources)
+[NX Daemon Server] - 2024-06-22T18:58:37.149Z - [WATCHER]: Stopping the watcher for /home/user/Documents/learn/templates/nextauth-hono (outputs)
+[NX Daemon Server] - 2024-06-22T18:58:37.149Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
