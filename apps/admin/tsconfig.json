@@ -1,0 +1,73 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2021",
+
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "sourceMap": false,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "types": [
+      "node",
+      "body-parser",
+      "connect",
+      "estree",
+      "express-serve-static-core",
+      "hoist-non-react-statics",
+      "http-errors",
+      "json-schema",
+      "parse-json",
+      "prop-types",
+      "qs",
+      "range-parser",
+      "react",
+      "react-transition-group",
+      "resolve",
+      "semver",
+      "send",
+      "serve-static",
+      "use-sync-external-store"
+    ]
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/src/**/*", "src/db/src"]
+}
+
+// {
+//   "compilerOptions": {
+//     "jsx": "react",
+//     "module": "nodenext",
+//     "moduleResolution": "nodenext",
+//     "target": "ES2021",
+//     "declaration": false,
+//     "removeComments": true,
+//     "emitDecoratorMetadata": false,
+//     "experimentalDecorators": true,
+//     "allowSyntheticDefaultImports": true,
+//     "allowJs": true,
+//     "sourceMap": false,
+//     "outDir": "./dist",
+//     "baseUrl": "./",
+//     "incremental": true,
+//     "skipLibCheck": true,
+//     "resolveJsonModule": true,
+//     "esModuleInterop": true,
+//   },
+//   "exclude": [
+//     "node_modules"
+//   ],
+//   "include": [
+//     "**/src/**/*"
+// , "src/db/src"  ]
+// }
