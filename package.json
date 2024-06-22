@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "next": "14.2.4",
     "@adminjs/cli": "^1.0.5"
   }
 }
