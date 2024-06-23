@@ -3,9 +3,12 @@
     "build": {
       "cache": true,
       "inputs": ["{projectRoot}/**/*", "!{projectRoot}/**/*.md"],
-      "dependsOn": ["build","^build"]
+      "dependsOn": ["build", "^build"]
     },
     "dev": {
+      "dependsOn": ["^build"]
+    },
+    "start": {
       "dependsOn": ["^build"]
     },
     "test": {

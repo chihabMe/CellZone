@@ -6,13 +6,18 @@ declare global {
   var prisma: PrismaClient;
 }
 
-const libsql = createClient({
-  url: `${process.env.TURSO_DATABASE_URL}`,
-  authToken: `${process.env.TURSO_AUTH_TOKEN}`,
-});
-
-const adapter = new PrismaLibSQL(libsql);
-export const prisma = global.prisma || new PrismaClient({ adapter });
-if (process.env.NODE_ENV !== "production") global.prisma = prisma;
+let db: PrismaClient;
+if (process.env.NODE_ENV !== "production") {
+  db = global.prisma || new PrismaClient();
+  global.prisma = db;
+} else {
+  const libsql = createClient({
+    url: `${process.env.TURSO_DATABASE_URL}`,
+    authToken: `${process.env.TURSO_AUTH_TOKEN}`,
+  });
+  const adapter = new PrismaLibSQL(libsql);
+  db = new PrismaClient({ adapter });
+}
+export const prisma = db;
 
 export * from "@prisma/client";

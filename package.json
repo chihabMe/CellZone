@@ -2,10 +2,11 @@
   "name": "nextauth-hono",
   "version": "1.0.0",
   "scripts": {
-    "dev:web": "pnpm --filter web dev",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "pnpm --filter db  generate && pnpm --filter web build",
-    "build:admin": "pnpm --filter db  generate && pnpm --filter admin build"
+    "dev:web": "pnpm nx  dev web",
+    "dev:admin": "pnpm nx dev admin",
+    "build:web": "pnpm nx build web",
+    "build:admin": "pnpm nx build admin",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",

@@ -85,7 +85,7 @@ const resources = [
 
 const Footer = () => {
   return (
-    <footer className="bg-black py-20 px-4">
+    <footer className="bg-black py-32 px-4">
       <div className="container  mx-auto  gap-6 grid grid-cols-1  lg:grid-cols-4">
         <div className="space-y-4 flex flex-col justify-between  grid-cols-subgrid  lg:col-span-2">
           <div className="flex flex-col   ">
