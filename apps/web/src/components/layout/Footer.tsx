@@ -99,7 +99,7 @@ const Footer = () => {
           </div>
           <ul className="flex space-x-8">
             {socialMedia.map((s) => (
-              <li className="cursor-pointer" key={s.link}>
+              <li className="cursor-pointer" key={`social_${s.link}_${s.name}`}>
                 <a href={s.link} target="_blank">
                   <Image
                     alt={`${s.name} image `}
@@ -131,12 +131,14 @@ const Footer = () => {
         <div>
           <ul className="flex flex-col   ">
             <li className="py-2">
-              <h1 className="text-white text-lg font-medium">Assistance to the buyer</h1>
+              <h1 className="text-white text-lg font-medium">
+                Assistance to the buyer
+              </h1>
             </li>
             {resources.map((s) => (
               <li
                 className=" py-2 text-[15px] hover:text-white text-gray-400 transition-all duration-300"
-                key={`service_${s.href}`}
+                key={`resources_${s.href}`}
               >
                 <Link href={s.href}>{s.text}</Link>
               </li>

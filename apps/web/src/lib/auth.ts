@@ -2,20 +2,29 @@ import CredentialsProvider from "@auth/core/providers/credentials";
 import { db } from "./db";
 import { compare } from "bcrypt";
 import { AuthConfig, DefaultSession } from "@auth/core/types";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import { Adapter } from "@auth/core/adapters";
 
-declare module "@auth/core" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-      // ...other properties
-      // role: UserRole;
-    } & DefaultSession["user"];
-  }
-}
+// declare module "" {
+//   interface Session extends DefaultSession {
+//     user: {
+//       id: string;
+//       // ...other properties
+//       // role: UserRole;
+//     } & DefaultSession["user"];
+//   }
+// }
 
-export const authOptions: AuthConfig = {
+export const authOptions: NextAuthConfig = {
+  // cookies: {
+  //   csrfToken: {
+  //     name: "next-auth.csrf-token",
+  //   },
+  //   sessionToken: {
+  //     name: "next-auth.session-token",
+  //   },
+  // },
   secret: process.env.AUTH_SECRET,
   adapter: PrismaAdapter(db) as Adapter,
   session: {
@@ -63,3 +72,4 @@ export const authOptions: AuthConfig = {
     newUser: "/auth/register",
   },
 };
+export const { auth, handlers, signIn, signOut } = NextAuth(authOptions);

@@ -39,14 +39,14 @@ app.use(async (c, next) => {
   await next();
 });
 
-//intitling the auth in all routes
-app.use(
-  "*",
-  initAuthConfig((c) => authOptions)
-);
+// //intitling the auth in all routes
+// app.use(
+//   "*",
+//   initAuthConfig((c) => authOptions)
+// );
 
 //added the auth routes (login,logout,...)
-app.use("/api/auth/*", authHandler());
+// app.use("/api/auth/*", authHandler());
 
 // app.use("/api/*", verifyAuth());
 

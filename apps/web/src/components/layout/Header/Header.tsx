@@ -8,6 +8,8 @@ import {
 import HeaderNavItem from "./HeaderNavItem";
 import UserAvatar from "./UserAvatar";
 import Link from "next/link";
+import HeaderCart from "./HeaderCart";
+import HeaderLiked from "./HeaderLiked";
 
 const links = [
   { text: "Home", href: "/" },
@@ -43,13 +45,8 @@ const Header = () => {
         </ul>
       </nav>
       <div className="flex items-center space-x-10 ">
-        <div className="cursor-pointer">
-          <HeartIcon className="h-7 w-7 " />
-        </div>
-
-        <div className="cursor-pointer">
-          <ShoppingCartIcon className="h-7 w-7" />
-        </div>
+        <HeaderLiked />
+        <HeaderCart />
         <UserAvatar />
       </div>
     </header>
