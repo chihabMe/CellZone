@@ -50,9 +50,7 @@ export const authOptions: AuthConfig = {
           const user = await db.user.findFirst({
             where: { email: data.email },
           });
-          console.log("------------");
           if (!user) throw new Error("Invalid password or Email");
-          console.log("------------");
           const isValid = await compare(data.password, user.password as string);
           if (!isValid) return null;
           return { id: user.id, email: user.email, name: user.username };
