@@ -12,9 +12,9 @@ const UserAvatar = () => {
     return (
       <div className="w-7 h-7 bg-bray-300">
         <Skeleton
-        //   baseColor="#7a8df3"
-        //   highlightColor="#44b7ec"
-        //   className="bg-blue-400"
+          //   baseColor="#7a8df3"
+          //   highlightColor="#44b7ec"
+          //   className="bg-blue-400"
           circle={true}
           height={28}
           width={28}
@@ -22,8 +22,8 @@ const UserAvatar = () => {
       </div>
     );
   const handleClick = () => {
-    if (session.status == "authenticated")
-      window.alert("User is authenticated");
+    console.log(session)
+    if (session.status == "authenticated") router.push("/accounts/profile");
     else router.push("/auth/login");
   };
   return (

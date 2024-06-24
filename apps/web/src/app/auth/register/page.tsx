@@ -1,43 +1,18 @@
-import { db } from "@/lib/db";
-import { hash } from "bcrypt";
-import React from "react";
+import Button from "@/components/ui/Button";
+import FormController from "@/components/ui/FormController";
+import { handleRegisterAction } from "./actions";
+import RegistrationForm from "./components/RegistrationForm";
 
 const RegisterPage = async () => {
   return (
-    <div>
-      <form action={handleRegisterAction}>
-        <input type="email" name="email" />
-
-        <input name="username" type="text" />
-        <input type="password" name="password" />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <main className="min-h-[93vh] flex justify-center items-center">
+      <section className="container mx-auto">
+        <div className="p-4 flex flex-col  rounded-lg w-full max-w-[500px] mx-auto">
+          <RegistrationForm />
+        </div>
+      </section>
+    </main>
   );
-};
-const handleRegisterAction = async (data: FormData) => {
-  "use server";
-  console.log(data);
-  const email = data.get("email");
-  const username = data.get("username");
-  const password = data.get("password");
-  console.log(email, username, password);
-  if (
-    typeof email != "string" ||
-    typeof username != "string" ||
-    typeof password != "string"
-  )
-    return {
-      errors: "invalid inputs",
-    };
-  const passwordHash = await hash(password, 14);
-  await db.user.create({
-    data: {
-      email,
-      password: passwordHash,
-      usenrame: username,
-    },
-  });
 };
 
 export default RegisterPage;

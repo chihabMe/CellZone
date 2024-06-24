@@ -9,6 +9,7 @@ import { twMerge } from "tailwind-merge";
 const getPoPularProducts = () => db.product.findMany({ take: 4 });
 const Popular = async () => {
   const products = await getPoPularProducts();
+  if (products.length == 0) return <div></div>;
   return (
     <section className="container mx-auto py-8">
       <h1 className="text-3xl font-bold py-4 pb-8">Popular products</h1>

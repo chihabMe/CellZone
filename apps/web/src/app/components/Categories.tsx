@@ -1,69 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "@heroicons/react/24/outline";
-import { Category } from "@prisma/client";
-import { db } from "@/lib/db";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { getCategories } from "../data/categories.data";
 
 let host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
 if (!host.includes("https")) host = "https://" + host;
 
-// const categories = [
-//   {
-//     name: "phones",
-//     image: "/images/phone-icon.png",
-//     href: "products?category=phones",
-//   },
-//   {
-//     name: "smart watches",
-//     image: "/images/watch-icon.png",
-//     href: "products?category=watch",
-//   },
-//   {
-//     name: "headphones",
-//     image: "/images/headphone-icon.png",
-//     href: "products?category=headphones",
-//   },
-
-//   {
-//     name: "cameras",
-//     image: "/images/camera-icon.png",
-//     href: "products?category=cameras",
-//   },
-//   {
-//     name: "computers",
-//     image: "/images/computer-icon.png",
-//     href: "products?category=computers",
-//   },
-//   {
-//     name: "gaming",
-//     image: "/images/gaming-icon.png",
-//     href: "products?category=gaming",
-//   },
-// ];
-const getCategories = async (): Promise<Category[]> => {
-  return db.category.findMany()
-  
-  // const url = `${host}/api/categories`;
-  // const response = await fetch(url, {
-  //   method: "GET",
-  //   cache: "force-cache",
-  // });
-  // if (!response.ok) {
-  //   console.error(url);
-  //   console.error(response.status);
-  //   console.error(response.statusText);
-  //   console.error(response.body);
-  //   throw new Error("failed to fetch categories");
-  // }
-  // return response.json();
-};
 const Categories = async () => {
-  const categories = await getCategories();
+  let categories = await getCategories();
   return (
     <section className="py-10">
       <div className="container max-w-screen-xl mx-auto">

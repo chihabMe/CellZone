@@ -5,8 +5,8 @@ import React from "react";
 
 const ProfilePage = () => {
   return (
-    <ProtectedWrapper>
-      <div>
+    <main className="min-h-screen">
+      <ProtectedWrapper>
         <button
           onClick={() =>
             signOut({ redirect: true, callbackUrl: "/auth/login" })
@@ -15,8 +15,8 @@ const ProfilePage = () => {
         >
           logout
         </button>
-      </div>
-    </ProtectedWrapper>
+      </ProtectedWrapper>
+    </main>
   );
 };
 
