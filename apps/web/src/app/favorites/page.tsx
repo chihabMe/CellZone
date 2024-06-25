@@ -1,7 +1,10 @@
 import ProductCard from "@/components/ui/ProductCard";
 import { getLikedProducts } from "@/data/products.data";
+import { Metadata } from "next";
 import React from "react";
-
+export const metadata: Metadata = {
+  title: "favorites ",
+};
 const FavoritesPage = async () => {
   const products = await getLikedProducts();
   return (
