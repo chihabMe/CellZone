@@ -6,7 +6,7 @@ import provider from './admin/auth-provider.js';
 import options from './admin/options.js';
 import initializeDb from './db/index.js';
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const start = async () => {
   const app = express();

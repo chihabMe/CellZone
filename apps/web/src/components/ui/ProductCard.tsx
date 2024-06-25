@@ -3,13 +3,17 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as FilledHeartIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Product } from "@prisma/client";
 
 import React, { useState } from "react";
 import Button from "./Button";
 import { AnimatePresence } from "framer-motion";
+import { db } from "@/lib/db";
+import { error } from "console";
+import { auth } from "@/lib/auth";
+import { likeUnlike } from "@/actions/products.actions";
+import IProduct from "@/interfaces/IProduct";
 interface Props {
-  product: Product;
+  product: IProduct;
 }
 const ProductCard = (props: Props) => {
   return (
@@ -33,30 +37,36 @@ const ProductCard = (props: Props) => {
     </div>
   );
 };
-const LikeButton = (props: { product: Product }) => {
-  const [liked, setIsLIked] = useState(false);
-  const handleToggleLike = () => setIsLIked((p) => !p);
+const LikeButton = (props: { product: IProduct }) => {
+  const [liked, setIsLIked] = useState(props.product.liked);
+  const handleToggleLike = async () => {
+    setIsLIked((p) => !p);
+    const response = await likeUnlike(props.product.id);
+    if (response.error) return console.error(response.error);
+    console.log("response ", response);
+  };
+
   return (
     <div
       className="cursor-pointer absolute top-4 right-3"
       onClick={handleToggleLike}
     >
-        {!liked && (
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0.8 }}
-            animate={{ scale: 1, opacity: 1 }}
-          >
-            <HeartIcon className={`h-7 w-7   text-red-400`} />
-          </motion.div>
-        )}
-        {liked && (
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0.8 }}
-            animate={{ scale: 1, opacity: 1 }}
-          >
-            <FilledHeartIcon className={`h-7 w-7   text-red-400`} />
-          </motion.div>
-        )}
+      {!liked && (
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0.8 }}
+          animate={{ scale: 1, opacity: 1 }}
+        >
+          <HeartIcon className={`h-7 w-7   text-red-400`} />
+        </motion.div>
+      )}
+      {liked && (
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0.8 }}
+          animate={{ scale: 1, opacity: 1 }}
+        >
+          <FilledHeartIcon className={`h-7 w-7   text-red-400`} />
+        </motion.div>
+      )}
     </div>
   );
 };

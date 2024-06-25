@@ -1,30 +1,37 @@
 import ProductCard from "@/components/ui/ProductCard";
-import { Prisma, Product } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import * as Tabs from "@radix-ui/react-tabs";
 import ClientMotion from "./ClientMotion";
 import { db } from "@/lib/db";
+import { auth } from "@/lib/auth";
+import { cache } from "react";
+import IProduct from "@/interfaces/IProduct";
 let host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
 if (!host.includes("https")) host = "https://" + host;
 
-const getProducts = async (
-  where: Prisma.ProductWhereInput
-): Promise<Product[]> => {
-  return db.product.findMany({
-    where,
-  });
-  // const response = await fetch(url, {
-  //   method: "GET",
-  //   cache: "no-cache",
-  // });
-  // if (!response.ok) {
-  //   console.error("url", url);
-  //   console.error(response.status);
-  //   console.error(response.statusText);
-  //   console.error(response.body);
-  //   throw new Error("can't fetch the products");
-  // }
-  // return response.json();
-};
+const getProducts = cache(
+  async (where: Prisma.ProductWhereInput): Promise<IProduct[]> => {
+    const session = await auth();
+    if (!session) {
+      return db.product.findMany({ where });
+    }
+    const userId = session.user.id;
+    const products = await db.product.findMany({
+      where,
+      include: {
+        LikedBy: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    return products.map((p) => ({
+      ...p,
+      liked: p.LikedBy.some((u) => u.id === userId),
+    }));
+  }
+);
 const tabs: {
   name: string;
   where: Prisma.ProductWhereInput;

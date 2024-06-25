@@ -15,12 +15,18 @@ const Popular = async () => {
       <h1 className="text-3xl font-bold py-4 pb-8">Popular products</h1>
       <div className="py-4 grid  px-4 sm:px-0  grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         <PopularProductItem className="bg-[#fff]" product={products[0]} />
-        <PopularProductItem className="bg-gray-100" product={products[1]} />
-        <PopularProductItem className="bg-gray-200" product={products[2]} />
-        <PopularProductItem
-          className="text-gray-200 bg-[#2C2C2C]"
-          product={products[3]}
-        />
+        {products.length > 1 && (
+          <PopularProductItem className="bg-gray-100" product={products[1]} />
+        )}
+        {products.length > 2 && (
+          <PopularProductItem className="bg-gray-200" product={products[2]} />
+        )}
+        {products.length > 3 && (
+          <PopularProductItem
+            className="text-gray-200 bg-[#2C2C2C]"
+            product={products[3]}
+          />
+        )}
       </div>
     </section>
   );
