@@ -6,10 +6,6 @@ import Image from "next/image";
 
 import React, { useState } from "react";
 import Button from "./Button";
-import { AnimatePresence } from "framer-motion";
-import { db } from "@/lib/db";
-import { error } from "console";
-import { auth } from "@/lib/auth";
 import { likeUnlike } from "@/actions/products.actions";
 import IProduct from "@/interfaces/IProduct";
 interface Props {
@@ -17,7 +13,7 @@ interface Props {
 }
 const ProductCard = (props: Props) => {
   return (
-    <div className="relative   flex flex-col rounded-md py-4 pt-10  bg-gray-200 items-center space-y-4">
+    <div className="relative  max-w-[300px]  flex flex-col rounded-md py-4 pt-10  bg-gray-200 items-center space-y-4">
       <LikeButton product={props.product} />
       <Image
         src={props.product.image}

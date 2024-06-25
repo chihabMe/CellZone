@@ -6,32 +6,10 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { cache } from "react";
 import IProduct from "@/interfaces/IProduct";
+import { getProducts } from "@/data/products.data";
 let host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
 if (!host.includes("https")) host = "https://" + host;
 
-const getProducts = cache(
-  async (where: Prisma.ProductWhereInput): Promise<IProduct[]> => {
-    const session = await auth();
-    if (!session) {
-      return db.product.findMany({ where });
-    }
-    const userId = session.user.id;
-    const products = await db.product.findMany({
-      where,
-      include: {
-        LikedBy: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-    return products.map((p) => ({
-      ...p,
-      liked: p.LikedBy.some((u) => u.id === userId),
-    }));
-  }
-);
 const tabs: {
   name: string;
   where: Prisma.ProductWhereInput;

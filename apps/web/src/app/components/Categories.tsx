@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { getCategories } from "../data/categories.data";
+import { getCategories } from "@/data/categories.data";
 
 let host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "http://localhost:3000";
 if (!host.includes("https")) host = "https://" + host;
