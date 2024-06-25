@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import { getPoPularProducts } from "@/data/products.data";
 import { db } from "@/lib/db";
 import { Product } from "@prisma/client";
 import Image from "next/image";
@@ -6,7 +7,6 @@ import Link from "next/link";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-const getPoPularProducts = () => db.product.findMany({ take: 4 });
 const Popular = async () => {
   const products = await getPoPularProducts();
   if (products.length == 0) return <div></div>;

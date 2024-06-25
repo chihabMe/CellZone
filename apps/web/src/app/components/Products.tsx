@@ -64,7 +64,7 @@ const ProductsList = async (props: {
   where: Prisma.ProductWhereInput;
   title: string;
 }) => {
-  const products = await getProducts(props.where);
+  const products = await getProducts({ where: props.where });
   return (
     <div>
       <div className=" px-2 container mx-auto max-w-screen-xl gap-4 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

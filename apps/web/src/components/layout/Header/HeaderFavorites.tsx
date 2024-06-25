@@ -9,7 +9,7 @@ const HeaderFavorites = async () => {
   const count = await getLikedCount();
   console.log("count ", count);
   return (
-    <div className="cursor-pointer p-3 hover:bg-gray-100 rounded-full  relative ">
+    <div className="cursor-pointer w-12 h-12 flex justify-center items-center hover:bg-gray-100 rounded-full  relative ">
       <Link href="/favorites">
         <div>
           <span className="w-5 h-5 rounded-full bg-blue-500 text-white p-1 text-xs text-center absolute top-1 right-1">

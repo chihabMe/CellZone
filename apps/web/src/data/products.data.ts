@@ -5,16 +5,17 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { Prisma, Product } from "db";
 import { cache } from "react";
-
+const d: Prisma.ProductFindManyArgs = {};
+db.product.findMany(d);
 export const getProducts = cache(
-  async (where: Prisma.ProductWhereInput): Promise<IProduct[]> => {
+  async (args: Prisma.ProductFindManyArgs): Promise<IProduct[]> => {
     const session = await auth();
     if (!session) {
-      return db.product.findMany({ where });
+      return db.product.findMany(args);
     }
     const userId = session.user.id;
     const products = await db.product.findMany({
-      where,
+      ...args,
       include: {
         LikedBy: {
           select: {
@@ -55,3 +56,9 @@ export const getLikedCount = cache(async () => {
   if (!products) return 0;
   return products.length;
 });
+
+export const getPoPularProducts = cache(() =>
+  getProducts({
+    take: 4,
+  })
+);
