@@ -9,7 +9,7 @@ import HeaderNavItem from "./HeaderNavItem";
 import UserAvatar from "./UserAvatar";
 import Link from "next/link";
 import HeaderCart from "./HeaderCart";
-import HeaderLiked from "./HeaderLiked";
+import HeaderFavorites from "./HeaderFavorites";
 
 const links = [
   { text: "Home", href: "/" },
@@ -44,8 +44,8 @@ const Header = () => {
           ))}
         </ul>
       </nav>
-      <div className="flex items-center space-x-10 ">
-        <HeaderLiked />
+      <div className="flex items-center space-x-6 ">
+        <HeaderFavorites />
         <HeaderCart />
         <UserAvatar />
       </div>
