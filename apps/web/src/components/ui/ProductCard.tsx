@@ -1,20 +1,44 @@
 "use client";
-import { HeartIcon } from "@heroicons/react/24/outline";
+import { HeartIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as FilledHeartIcon } from "@heroicons/react/24/solid";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
-import { likeUnlike } from "@/actions/products.actions";
+import { addToCart, likeUnlike } from "@/actions/products.actions";
+import { useAction } from "next-safe-action/hooks";
 import IProduct from "@/interfaces/IProduct";
+import { twMerge } from "tailwind-merge";
 interface Props {
   product: IProduct;
 }
 const ProductCard = (props: Props) => {
+  const [isVisisble, setIsVisible] = useState(false);
+
   return (
-    <div className="relative  max-w-[300px]  flex flex-col rounded-md py-4 pt-10  bg-gray-200 items-center space-y-4">
-      <LikeButton product={props.product} />
+    <div
+      onMouseOver={() => setIsVisible(true)}
+      onMouseOut={() => setIsVisible(false)}
+      className="relative group  max-w-[300px]  flex flex-col rounded-md py-4 pt-10  bg-gray-200 items-center space-y-4"
+    >
+      <div className="flex flex-col  items-center  absolute top-2 right-2">
+        <LikeButton product={props.product} />
+        <AnimatePresence>
+          {isVisisble && (
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0.8 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0, x: 1 }}
+            >
+              <CartButton
+                className="  transition-all duration-300  "
+                product={props.product}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
       <Image
         src={props.product.image}
         alt={props.product.name}
@@ -33,18 +57,43 @@ const ProductCard = (props: Props) => {
     </div>
   );
 };
-const LikeButton = (props: { product: IProduct }) => {
-  const [liked, setIsLIked] = useState(props.product.liked);
-  const handleToggleLike = async () => {
-    setIsLIked((p) => !p);
-    const response = await likeUnlike(props.product.id);
-    if (response.error) return console.error(response.error);
-    console.log("response ", response);
+
+const CartButton = (props: { className?: string; product: IProduct }) => {
+  const { execute, result, status, hasSucceeded, isExecuting } =
+    useAction(addToCart);
+  const handleAddToCart = async () => {
+    await execute({ productId: props.product.id });
   };
 
   return (
     <div
-      className="cursor-pointer absolute top-4 right-3"
+      className={twMerge(
+        `cursor-pointer w-11 h-11 ${props.product.inCart && "!bg-blue-50 ring-2 ring-blue-200"} hover:bg-gray-100 transition-all duration-200 flex items-center justify-center rounded-full `,
+        props.className
+      )}
+      onClick={handleAddToCart}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0.8 }}
+        animate={{ scale: 1, opacity: 1 }}
+      >
+        <ShoppingCartIcon className="w-6 h-6 active:scale-95 text-gray-500" />
+      </motion.div>
+    </div>
+  );
+};
+const LikeButton = (props: { product: IProduct }) => {
+  const [liked, setIsLIked] = useState(props.product.liked);
+  const { execute, hasErrored, hasSucceeded, result } = useAction(likeUnlike);
+  const handleToggleLike = async () => {
+    setIsLIked((p) => !p);
+    await execute({ productId: props.product.id });
+    if (hasErrored) console.log(result);
+  };
+
+  return (
+    <div
+      className="cursor-pointer overflow-hidden w-11 h-11 hover:bg-gray-100 transition-all duration-200 flex items-center justify-center rounded-full "
       onClick={handleToggleLike}
     >
       {!liked && (
@@ -52,7 +101,7 @@ const LikeButton = (props: { product: IProduct }) => {
           initial={{ scale: 0.9, opacity: 0.8 }}
           animate={{ scale: 1, opacity: 1 }}
         >
-          <HeartIcon className={`h-7 w-7   text-red-400`} />
+          <HeartIcon className={`h-6 w-6   text-red-400`} />
         </motion.div>
       )}
       {liked && (
@@ -60,7 +109,7 @@ const LikeButton = (props: { product: IProduct }) => {
           initial={{ scale: 0.9, opacity: 0.8 }}
           animate={{ scale: 1, opacity: 1 }}
         >
-          <FilledHeartIcon className={`h-7 w-7   text-red-400`} />
+          <FilledHeartIcon className={`h-6 w-6   text-red-400`} />
         </motion.div>
       )}
     </div>

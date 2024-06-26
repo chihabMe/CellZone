@@ -22,12 +22,28 @@ export const getProducts = cache(
             id: true,
           },
         },
+        user: {
+          select: {
+            Cart: {
+              select: {
+                products: {
+                  select: {
+                    id: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     });
-    return products.map((p) => ({
+    console.log();
+    return  products.map((p) => ({
       ...p,
       liked: p.LikedBy.some((u) => u.id === userId),
+      inCart: p.user.Cart?.products.some((cartP) => cartP.id === p.id),
     }));
+
   }
 );
 

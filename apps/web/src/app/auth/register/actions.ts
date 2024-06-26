@@ -1,30 +1,31 @@
 "use server";
 
-import { db } from "@/lib/db";
+import { actionClient } from "@/lib/next-safe-actions";
 import { hash } from "bcrypt";
-import { error } from "console";
 import { redirect } from "next/navigation";
+import { z } from "zod";
+const registrationSchema = z.object({
+  email: z.string().email(),
+  username: z.string().min(4),
+  password: z.string().min(6),
+});
 
-export async function handleRegisterAction(data: FormData) {
-  await new Promise((resolve) => setTimeout(resolve, 4000));
-  console.log(data);
-  const email = data.get("email");
-  const username = data.get("username");
-  const password = data.get("password");
-  console.log(email, username, password);
-  if (
-    typeof email != "string" ||
-    typeof username != "string" ||
-    typeof password != "string"
-  )
-    return { error: "Invalid  Inputs" };
-  const passwordHash = await hash(password, 14);
-  await db.user.create({
-    data: {
-      email,
-      password: passwordHash,
-      username: username,
-    },
+export const handleRegisterAction = actionClient
+  .schema(registrationSchema)
+  .action(async ({ parsedInput, ctx }) => {
+    const { email, password, username } = parsedInput;
+    const passwordHash = await hash(password, 14);
+    const user = await ctx.db.user.create({
+      data: {
+        email,
+        password: passwordHash,
+        username: username,
+      },
+    });
+    await ctx.db.cart.create({
+      data: {
+        userId: user.id,
+      },
+    });
+    redirect("/auth/login");
   });
-  redirect("/auth/login");
-}
