@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button";
-import { getPoPularProducts } from "@/data/products.data";
+import { getPopularProducts } from "@/data/products.data";
 import { db } from "@/lib/db";
 import { Product } from "@prisma/client";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 const Popular = async () => {
-  const products = await getPoPularProducts();
+  const products = await getPopularProducts();
   if (products.length == 0) return <div></div>;
   return (
     <section className="container mx-auto py-8">
