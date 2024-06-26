@@ -1,7 +1,7 @@
 "use server";
 
+import { hashPassword } from "@/lib/hash";
 import { actionClient } from "@/lib/next-safe-actions";
-import { hash } from "bcrypt";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 const registrationSchema = z.object({
@@ -14,7 +14,9 @@ export const handleRegisterAction = actionClient
   .schema(registrationSchema)
   .action(async ({ parsedInput, ctx }) => {
     const { email, password, username } = parsedInput;
-    const passwordHash = await hash(password, 14);
+    console.log("pss");
+    const passwordHash = await hashPassword(password)
+    console.log("pss2");
     const user = await ctx.db.user.create({
       data: {
         email,

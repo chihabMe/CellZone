@@ -2,7 +2,8 @@
 import Button from "@/components/ui/Button";
 import FormController from "@/components/ui/FormController";
 import { handleRegisterAction } from "../actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAction } from "next-safe-action/hooks";
 
 export default function RegistrationForm() {
   const [errors, setErrors] = useState({
@@ -10,20 +11,28 @@ export default function RegistrationForm() {
     password: "",
     username: "",
   });
+
+  const { execute, isExecuting, hasSucceeded, result } =
+    useAction(handleRegisterAction);
+  useEffect(() => {
+    if (!isExecuting && !hasSucceeded) {
+      setErrors({
+        email: result?.validationErrors?.email?._errors as unknown as string,
+        password: result?.validationErrors?.password
+          ?._errors as unknown as string,
+        username: result?.validationErrors?.username
+          ?._errors as unknown as string,
+      });
+    }
+  }, [isExecuting, hasSucceeded]);
   return (
     <form
       action={async function (data) {
-        const res = await handleRegisterAction({
+        await execute({
           email: data.get("email") as string,
           password: data.get("password") as string,
           username: data.get("username") as string,
         });
-        if (res && res.validationErrors)
-          setErrors({
-            email: res?.validationErrors?.email?._errors as unknown as string,
-            password: res?.validationErrors?.password?._errors as unknown as string,
-            username: res?.validationErrors?.username?._errors as unknown as string,
-          });
       }}
       className="flex  flex-col space-y-3 "
     >
@@ -49,7 +58,12 @@ export default function RegistrationForm() {
         placeholder="password"
         type="password"
       />
-      <div className="py-2"></div>
+      {result.serverError && (
+        <div className="py-4">
+          <span className="text-red-400 pt-1">{result.serverError}</span>
+        </div>
+      )}
+
       <Button className="text-gray-900 py-2">register</Button>
     </form>
   );

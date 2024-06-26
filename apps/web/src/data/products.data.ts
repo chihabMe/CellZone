@@ -9,7 +9,6 @@ import { cache } from "react";
 // Fetch user session
 const getSession = async () => {
   const session = await auth();
-  if (!session) throw new Error("Unauthorized");
   return session;
 };
 
@@ -76,6 +75,7 @@ export const getProducts = cache(
 
 export const getLikedProducts = cache(async (): Promise<IProduct[]> => {
   const session = await getSession();
+  if (!session) return [];
   const likedProducts = await fetchLikedProducts(session.user.id);
 
   // Enhance liked products with inCart information
@@ -95,12 +95,13 @@ export const getPopularProducts = cache(() =>
 
 export const getProductsInCart = cache(async () => {
   const session = await getSession();
+  if (!session) return [];
   const cartProducts = await fetchCartProducts(session.user.id);
-
   // Enhance cart products with liked information
   return enhanceProducts(cartProducts, session.user.id);
 });
 
 export const getProductsInCartCount = cache(async () => {
-  return (await getProductsInCart()).length;
+  const products = await getProductsInCart();
+  return products.length;
 });

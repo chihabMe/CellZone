@@ -1,18 +1,14 @@
-import CredentialsProvider from "@auth/core/providers/credentials";
+import { getServerSession } from "next-auth/next";
 import { db } from "./db";
-import { compare } from "bcrypt";
-import { AuthConfig, DefaultSession } from "@auth/core/types";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import NextAuth, { NextAuthConfig } from "next-auth";
-import { Adapter } from "@auth/core/adapters";
-import { DefaultJWT } from "@auth/core/jwt";
+import NextAuth, { DefaultSession, NextAuthOptions } from "next-auth";
+import { compareHash } from "./hash";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      // ...other properties
-      // role: UserRole;
+      role: string; // Adjusted to match your session setup
     } & DefaultSession["user"];
   }
 
@@ -21,86 +17,73 @@ declare module "next-auth" {
   }
 }
 
-export const authOptions: NextAuthConfig = {
-  // cookies: {
-  //   csrfToken: {
-  //     name: "next-auth.csrf-token",
-  //   },
-  //   sessionToken: {
-  //     name: "next-auth.session-token",
-  //   },
-  // },
+export const authOptions: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
-  adapter: PrismaAdapter(db) as Adapter,
   session: {
     maxAge: 30 * 24 * 60 * 60,
-
-    strategy: "jwt",
+    // Adjust your session configuration as needed
+    // strategy: "jwt", // This is not needed if using credentials provider
   },
 
   callbacks: {
-    jwt: async ({ token, user }) => {
+    async jwt({ token, user }) {
       if (user) {
-        return {
-          ...token,
-          id: user.id,
-          role: user.role,
-        };
+        token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },
-    session: async ({ session, user, token }) => {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id as string,
-          role: token.role as string,
-        },
-      };
+
+    async session({ session, token }) {
+      session.user.id = token.id as string;
+      session.user.role = token.role as string;
+      return session;
     },
   },
 
-  // callbacks: {
-  // },
   providers: [
-    {
-      ...CredentialsProvider({
-        credentials: {
-          email: { placeholder: "Email", type: "email", name: "email" },
-          password: {
-            placeholder: "Password",
-            type: "password",
-            name: "password",
-          },
+    CredentialsProvider({
+      name: "credentials",
+      type: "credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "Enter your email",
         },
-        async authorize(data) {
-          if (
-            !data.email ||
-            typeof data.email != "string" ||
-            typeof data.password != "string"
-          )
-            return null;
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Enter your password",
+        },
+      },
+      async authorize(credentials) {
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
+        if (!email || !password) return null;
 
-          const user = await db.user.findFirst({
-            where: { email: data.email },
-          });
-          if (!user) throw new Error("Invalid password or Email");
-          const isValid = await compare(data.password, user.password as string);
-          if (!isValid) return null;
-          return {
-            id: user.id,
-            email: user.email,
-            name: user.username,
-            role: user.role,
-          };
-        },
-      }),
-    },
+        const user = await db.user.findFirst({ where: { email } });
+        if (!user) throw new Error("Invalid email or password");
+
+        const isValid = await compareHash(password, user.password as string);
+        if (!isValid) return null;
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.username,
+          role: user.role,
+        };
+      },
+    }),
   ],
+
   pages: {
     signIn: "/auth/login",
     newUser: "/auth/register",
   },
 };
-export const { auth, handlers, signIn, signOut } = NextAuth(authOptions);
+
+export const auth = () => getServerSession(authOptions);
