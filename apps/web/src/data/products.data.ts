@@ -101,3 +101,44 @@ export const getProductsInCartCount = cache(async () => {
   const products = await getProductsInCart();
   return products.length;
 });
+export const getProductsScreenSizes = cache(async () => {
+  return db.product.findMany({
+    distinct: ["screenSize"],
+    select: {
+      screenSize: true,
+    },
+  });
+});
+
+export const getProductMarks = cache(async () => {
+  return db.productMark.findMany({
+    select: {
+      id: true,
+      name: true,
+      _count: {
+        select: {
+          Products: true,
+        },
+      },
+    },
+  });
+});
+
+export const getMemorySizes = cache(async () => {
+  return db.product.findMany({
+    distinct: ["memory"],
+    select: {
+      memory: true,
+    },
+  });
+});
+
+
+export const getCapacity = cache(async () => {
+  return db.product.findMany({
+    distinct: ["capacity"],
+    select: {
+      capacity: true,
+    },
+  });
+});
