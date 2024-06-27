@@ -1,6 +1,6 @@
 "use client";
 import React, { FormEvent, useActionState, useState } from "react";
-import { signIn } from "@hono/auth-js/react";
+import {  signIn  } from "next-auth/react"
 import Button from "@/components/ui/Button";
 import FormController from "@/components/ui/FormController";
 import { useRouter } from "next/navigation";
@@ -12,16 +12,21 @@ const LoginPage = () => {
   const router = useRouter();
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const res = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        email,
+        password
+      });
 
-    if (res && res.error) {
-      setError(res.error ?? "Invalid Inputs");
-    } else {
-      // router.replace("/");
+      if (res && res.error) {
+        setError(res.error ?? "Invalid Inputs");
+      } else {
+        router.replace("/");
+      }
+    } catch (err) {
+      console.error(err)
+      setError("Invalid Inputs");
     }
   };
   return (

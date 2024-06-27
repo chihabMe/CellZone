@@ -1,6 +1,6 @@
 "use client";
 import ProtectedWrapper from "@/components/wrappers/ProtectedWrapper";
-import { signOut } from "@hono/auth-js/react";
+import {   signOut } from "next-auth/react"
 import React from "react";
 
 const ProfilePage = () => {

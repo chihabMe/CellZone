@@ -1,7 +1,7 @@
 "use client";
-import { useSession } from "@hono/auth-js/react";
 import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const ProtectedWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();

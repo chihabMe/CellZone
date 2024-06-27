@@ -3,7 +3,7 @@ import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Skeleton from "react-loading-skeleton";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "@hono/auth-js/react";
+import { useSession } from "next-auth/react";
 
 const UserAvatar = () => {
   const session = useSession();
