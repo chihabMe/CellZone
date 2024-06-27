@@ -7,10 +7,6 @@ import { Prisma, Product } from "db";
 import { cache } from "react";
 
 // Fetch user session
-const getSession = async () => {
-  const session = await auth();
-  return session;
-};
 
 // Fetch products liked by the user
 const fetchLikedProducts = async (userId: string) => {
@@ -43,9 +39,9 @@ const isProductInCart = (cartProducts: Product[], productId: string) => {
 };
 
 // Enhance products with liked and inCart properties
-const enhanceProducts = async (products: Product[], userId: string) => {
-  const likedProducts = await fetchLikedProducts(userId);
-  const cartProducts = await fetchCartProducts(userId);
+const enhanceProducts = async (products: Product[], userId?: string) => {
+  const likedProducts = userId ? await fetchLikedProducts(userId) : [];
+  const cartProducts = userId ? await fetchCartProducts(userId) : [];
 
   return products.map((p) => ({
     ...p,
@@ -59,22 +55,22 @@ export const getProducts = cache(
     const session = await auth();
     const products = await db.product.findMany(args);
 
-    if (!session) {
-      // Return products without liked and inCart information
-      return products.map((p) => ({
-        ...p,
-        liked: false,
-        inCart: false,
-      }));
-    }
+    // if (!session) {
+    //   // Return products without liked and inCart information
+    //   return products.map((p) => ({
+    //     ...p,
+    //     liked: false,
+    //     inCart: false,
+    //   }));
+    // }
 
     // Enhance products with liked and inCart information
-    return enhanceProducts(products, session.user.id);
+    return enhanceProducts(products, session?.user.id);
   }
 );
 
 export const getLikedProducts = cache(async (): Promise<IProduct[]> => {
-  const session = await getSession();
+  const session = await auth();
   if (!session) return [];
   const likedProducts = await fetchLikedProducts(session.user.id);
 
@@ -94,7 +90,7 @@ export const getPopularProducts = cache(() =>
 );
 
 export const getProductsInCart = cache(async () => {
-  const session = await getSession();
+  const session = await auth();
   if (!session) return [];
   const cartProducts = await fetchCartProducts(session.user.id);
   // Enhance cart products with liked information
