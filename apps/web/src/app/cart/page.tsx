@@ -3,8 +3,8 @@ import { getProductsInCart } from "@/data/products.data";
 import { Metadata } from "next";
 import React from "react";
 export const metadata: Metadata = {
-  title: "favorites ",
-  description: "favorites products",
+  title: "cart  ",
+  description: "cart products",
 };
 
 const CartPage = async () => {

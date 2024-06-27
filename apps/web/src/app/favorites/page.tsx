@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import React from "react";
 export const metadata: Metadata = {
   title: "favorites ",
+  description: "favorites products ",
 };
 const FavoritesPage = async () => {
   const products = await getLikedProducts();
