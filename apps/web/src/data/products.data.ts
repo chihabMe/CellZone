@@ -133,12 +133,20 @@ export const getMemorySizes = cache(async () => {
   });
 });
 
-
 export const getCapacity = cache(async () => {
   return db.product.findMany({
     distinct: ["capacity"],
     select: {
       capacity: true,
+    },
+  });
+});
+
+export const getBatteryCapacity = cache(async () => {
+  return db.product.findMany({
+    distinct: ["batteryCapacity"],
+    select: {
+      batteryCapacity: true,
     },
   });
 });

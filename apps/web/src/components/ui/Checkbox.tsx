@@ -1,14 +1,22 @@
-import React from "react";
-
+"use client";
+import React, { useEffect, useState } from "react";
 import * as DefaultCheckBox from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@heroicons/react/24/solid";
 interface Props {
   defaultChecked?: boolean;
+  onChange?: (value: boolean) => void;
 }
-const Checkbox = (props: Props) => {
+
+const Checkbox = ({ onChange, defaultChecked }: Props) => {
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    onChange && onChange(checked);
+  }, [checked, onChange]);
   return (
     <DefaultCheckBox.Root
-      defaultChecked={props.defaultChecked}
+      onClick={() => setChecked((p) => !p)}
+      checked={checked}
+      defaultChecked={defaultChecked}
       className="  w-5  h-5 border-2    rounded-md    shadow-sm "
       id="c1"
     >

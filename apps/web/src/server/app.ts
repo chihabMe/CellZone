@@ -1,5 +1,4 @@
 import { Context, Hono } from "hono";
-import { authHandler, initAuthConfig, verifyAuth } from "@hono/auth-js";
 import { db } from "@/lib/db";
 import { authOptions } from "@/lib/auth";
 import { User } from "@prisma/client";

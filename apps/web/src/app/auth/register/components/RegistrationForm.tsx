@@ -24,7 +24,7 @@ export default function RegistrationForm() {
           ?._errors as unknown as string,
       });
     }
-  }, [isExecuting, hasSucceeded]);
+  }, [isExecuting, hasSucceeded, setErrors, result]);
   return (
     <form
       action={async function (data) {
