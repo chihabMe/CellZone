@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import React, { cache } from "react";
 const HeaderFavorites = async () => {
   const count = await getLikedCount();
-  console.log("count ", count);
   return (
     <div className="cursor-pointer w-12 h-12 flex justify-center items-center hover:bg-gray-100 rounded-full  relative ">
       <Link href="/favorites">

@@ -6,7 +6,7 @@ import BatteryCapacities from "./BatteryCapacities";
 import ScreenSizes from "./ScreenSizes";
 import MemorySizes from "./MemorySizes";
 import Capacities from "./Capacities";
-import { usePathname, useSearchParams,useRouter } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 export interface IMark {
   id: string;
   name: string;
@@ -42,17 +42,14 @@ const LeftSideFilterSearch = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const handleSearch = (key: string, value: string) => {
-    {
-      const params = new URLSearchParams(searchParams);
-      if (value) {
-        params.set(key, value.toString());
-      } else {
-        params.delete(key);
-      }
-      console.log(value);
-      router.replace(`${pathname}?${params.toString()}`);
+  const handleSearch = (key: string, value: string[]) => {
+    const params = new URLSearchParams(searchParams);
+    if (value.length) {
+      params.set(key, value.join("_or_"));
+    } else {
+      params.delete(key);
     }
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (
@@ -74,6 +71,7 @@ const LeftSideFilterSearch = ({
         queryKey="memorySize"
         memorySizes={memorySizes}
       />
+
       <Capacities
         handleSearch={handleSearch}
         queryKey="capacity"

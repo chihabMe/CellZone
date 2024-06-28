@@ -22,7 +22,6 @@ const UserAvatar = () => {
       </div>
     );
   const handleClick = () => {
-    console.log(session);
     if (session.status == "authenticated") router.push("/accounts/profile");
     else router.push("/auth/login");
   };

@@ -54,7 +54,6 @@ export const addToCart = protectedActionClient
     );
 
     if (productInCart) {
-      console.log("in cart");
       await db.cart.update({
         where: {
           id: cart.id,
@@ -70,7 +69,6 @@ export const addToCart = protectedActionClient
       revalidatePath("/");
       return { inCart: false };
     } else {
-      console.log("not in cart");
       await db.cart.update({
         where: {
           id: cart.id,

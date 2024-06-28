@@ -4,7 +4,6 @@ import Link from "next/link";
 import React from "react";
 const HeaderFavorites = async () => {
   const count = await getProductsInCartCount();
-  console.log("count ", count);
   return (
     <div className="cursor-pointer w-12 h-12 flex justify-center items-center hover:bg-gray-100 rounded-full  relative ">
       <Link href="/cart">

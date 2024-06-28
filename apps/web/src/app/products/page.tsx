@@ -25,35 +25,42 @@ const ProductsPage = async ({
 
   let whereClause: {
     name?: { contains: string };
-    batteryCapacity?: { equals: number };
-    memory?: { equals: number };
-    capacity?: { equals: number };
-    screenSize?: { equals: number };
-    ProductMark?: { name: { contains: string } };
+    batteryCapacity?: { in: number[] };
+    memory?: { in: number[] };
+    capacity?: { in: number[] };
+    screenSize?: { in: number[] };
+    ProductMark?: { name: { in: string[] } };
   } = {};
 
   if (query) {
     whereClause.name = { contains: query };
   }
 
-  if (batteryCapacity && !isNaN(parseInt(batteryCapacity))) {
-    whereClause.batteryCapacity = { equals: parseInt(batteryCapacity) };
+  if (batteryCapacity) {
+    const batteryCapacityArray = batteryCapacity
+      .split("_or_")
+      .map((v) => parseInt(v));
+    whereClause.batteryCapacity = { in: batteryCapacityArray };
   }
 
-  if (memorySize && !isNaN(parseInt(memorySize))) {
-    whereClause.memory = { equals: parseInt(memorySize) };
+  if (memorySize) {
+    const memorySizeArray = memorySize.split("_or_").map((v) => parseInt(v));
+    whereClause.memory = { in: memorySizeArray };
   }
 
-  if (capacity && !isNaN(parseInt(capacity))) {
-    whereClause.capacity = { equals: parseInt(capacity) };
+  if (capacity) {
+    const capacityArray = capacity.split("_or_").map((v) => parseInt(v));
+    whereClause.capacity = { in: capacityArray };
   }
 
-  if (screenSize && !isNaN(parseInt(screenSize))) {
-    whereClause.screenSize = { equals: parseInt(screenSize) };
+  if (screenSize) {
+    const screenSizeArray = screenSize.split("_or_").map((v) => parseInt(v));
+    whereClause.screenSize = { in: screenSizeArray };
   }
 
   if (mark) {
-    whereClause.ProductMark = { name: { contains: mark } };
+    const markArray = mark.split("_or_"); // Split marks into an array
+    whereClause.ProductMark = { name: { in: markArray } };
   }
 
   const products = await getProducts({

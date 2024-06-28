@@ -14,9 +14,7 @@ export const handleRegisterAction = actionClient
   .schema(registrationSchema)
   .action(async ({ parsedInput, ctx }) => {
     const { email, password, username } = parsedInput;
-    console.log("pss");
     const passwordHash = await hashPassword(password)
-    console.log("pss2");
     const user = await ctx.db.user.create({
       data: {
         email,

@@ -22,7 +22,6 @@ const LoginForm = () => {
       if (res && res.error) {
         setError(res.error ?? "Invalid Inputs");
       } else {
-        console.log("pass");
 
         router.push("/");
         router.refresh(); 
