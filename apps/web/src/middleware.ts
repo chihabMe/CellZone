@@ -10,23 +10,19 @@ const PROTECTED_ROTES = ["/accounts/*", "/cart", "/favorites"];
 
 // middleware is applied to all routes, use conditionals to select
 
-export default withAuth(
-  function middleware(req) {
-
-  },
-  {
-    callbacks: {
-      authorized: ({ req, token }) => {
-        console.log("--------------");
-        console.log(req.nextUrl.pathname, token);
-        console.error(req.nextUrl.pathname, token);
-        console.log("--------------");
-        if (!token) return false;
-        return true;
-      },
+export default withAuth(function middleware(req) {}, {
+  callbacks: {
+    authorized: ({ req, token }) => {
+      console.log("--------------");
+      console.log(process.env.NEXTAUTH_SECRET);
+      console.log(req.nextUrl.pathname, token);
+      console.error(req.nextUrl.pathname, token);
+      console.log("--------------");
+      if (!token) return false;
+      return true;
     },
-  }
-);
+  },
+});
 
 // export const config = { matcher: ["/admin"] };
 // export default authMiddleware((req) => {
