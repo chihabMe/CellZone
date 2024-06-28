@@ -88,7 +88,7 @@ const LikeButton = (props: { product: IProduct }) => {
   const handleToggleLike = async () => {
     setIsLIked((p) => !p);
     await execute({ productId: props.product.id });
-    if (hasErrored) console.log(result);
+    if (hasErrored) console.error(result);
   };
 
   return (

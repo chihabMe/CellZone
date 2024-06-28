@@ -13,11 +13,6 @@ const PROTECTED_ROTES = ["/accounts/*", "/cart", "/favorites"];
 export default withAuth(function middleware(req) {}, {
   callbacks: {
     authorized: ({ req, token }) => {
-      console.log("--------------");
-      console.log(process.env.NEXTAUTH_SECRET);
-      console.log(req.nextUrl.pathname, token);
-      console.error(req.nextUrl.pathname, token);
-      console.log("--------------");
       if (!token) return false;
       return true;
     },

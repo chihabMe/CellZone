@@ -7,7 +7,8 @@ declare global {
 }
 
 let db: PrismaClient;
-if (process.env.NODE_ENV !== "production") {
+// if (process.env.NODE_ENV !== "production") {
+if(false){
   db = global.prisma || new PrismaClient();
   global.prisma = db;
 } else {
