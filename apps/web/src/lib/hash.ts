@@ -1,5 +1,5 @@
-import { hash, verify } from "argon2";
+import { hash, compare } from "bcrypt";
 
-export const hashPassword = (password: string) => hash(password );
+export const hashPassword = (password: string) => hash(password, 14);
 export const compareHash = (password: string, hash: string) =>
-  verify(hash, password);
+  compare(password, hash);
