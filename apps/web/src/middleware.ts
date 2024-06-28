@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { withAuth } from "next-auth/middleware";
+import { withAuth } from "next-auth/middleware";
 
-export { default } from "next-auth/middleware";
+// export { default } from "next-auth/middleware";
 
 const ROOT = "/";
 const DEFAULT_REDIRECT = "/auth/login";
@@ -10,24 +10,23 @@ const PROTECTED_ROTES = ["/accounts/*", "/cart", "/favorites"];
 
 // middleware is applied to all routes, use conditionals to select
 
-// export default withAuth(
-//   function middleware(req) {
-//     console.log("middlewre-",req.nextUrl.pathname);
-//   },
-//   {
-//     callbacks: {
-//       authorized: ({ req, token }) => {
-//         console.log('--------------')
-//         console.log(req.nextUrl.pathname,token)
-//         console.log('--------------')
-//         if (PROTECTED_ROTES.includes(req.nextUrl.pathname) && token === null) {
-//           return false;
-//         }
-//         return true;
-//       },
-//     },
-//   }
-// );
+export default withAuth(
+  function middleware(req) {
+
+  },
+  {
+    callbacks: {
+      authorized: ({ req, token }) => {
+        console.log("--------------");
+        console.log(req.nextUrl.pathname, token);
+        console.error(req.nextUrl.pathname, token);
+        console.log("--------------");
+        if (!token) return false;
+        return true;
+      },
+    },
+  }
+);
 
 // export const config = { matcher: ["/admin"] };
 // export default authMiddleware((req) => {
