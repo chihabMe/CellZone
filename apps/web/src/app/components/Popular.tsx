@@ -1,6 +1,5 @@
 import Button from "@/components/ui/Button";
 import { getPopularProducts } from "@/data/products.data";
-import { db } from "@/lib/db";
 import { Product } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";

@@ -16,7 +16,7 @@ const Hero = () => {
             <p className="text-gray-500 font-bold md:text-lg">
               Created to change everything for the better. For everyone
             </p>
-            <Link href="/products ">
+            <Link href="/search ">
               <Button className="text-base md:text-lg">Shope Now</Button>
             </Link>
           </div>

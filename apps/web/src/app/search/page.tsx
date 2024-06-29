@@ -1,7 +1,7 @@
 import ProductCard from "@/components/ui/ProductCard";
 import { getProducts } from "@/data/products.data";
 import { Metadata } from "next";
-import React from "react";
+import React  from "react";
 
 export const metadata: Metadata = {
   title: "search product",
@@ -69,13 +69,13 @@ const ProductsPage = async ({
 
   return (
     <section className="">
-      <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
-          <li key={product.id}>
-            <ProductCard product={product} />
-          </li>
-        ))}
-      </ul>
+        <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {products.map((product) => (
+            <li key={product.id}>
+              <ProductCard product={product} />
+            </li>
+          ))}
+        </ul>
     </section>
   );
 };
