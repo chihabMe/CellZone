@@ -1,6 +1,7 @@
 "use client";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import React, { useRef } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useRef } from "react";
 
 interface Props {
   queryKey: string;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const Search = ({ handleSearch, queryKey }: Props) => {
+  const initialState = useSearchParams().get(queryKey) ?? "";
   const q = useRef<HTMLInputElement>(null);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -15,6 +17,9 @@ const Search = ({ handleSearch, queryKey }: Props) => {
       handleSearch(queryKey, [q?.current?.value ?? ""]);
     }
   };
+  useEffect(() => {
+    if (q.current) q.current.value = initialState;
+  }, []);
 
   return (
     <div className="bg-gray-100 hidden md:flex items-center h-11 space-x-2 p-1 px-4 rounded-md">
