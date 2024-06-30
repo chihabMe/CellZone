@@ -9,11 +9,12 @@ interface Props {
   capacity: ICapacity[];
   handleSearch: (key: string, value: string[]) => void;
   queryKey: string;
+  initialState: string[];
 }
 
-const Capacities = ({ capacity, handleSearch, queryKey }: Props) => {
+const Capacities = ({ capacity,initialState, handleSearch, queryKey }: Props) => {
   // State for selected values
-  const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
+  const [selectedValues, setSelectedValues] = React.useState<string[]>(initialState);
 
   // Function to toggle selected value
   const toggleValue = (value: string) => {
@@ -40,7 +41,10 @@ const Capacities = ({ capacity, handleSearch, queryKey }: Props) => {
             key={`capacity_${c.capacity}`}
             className="flex items-center space-x-4"
           >
-            <Checkbox onClick={() => toggleValue(c.capacity.toString())} />
+            <Checkbox
+            defaultChecked={initialState.includes(c.capacity.toString())}
+            
+            onClick={() => toggleValue(c.capacity.toString())} />
             <span>{c.capacity}GB</span>
           </li>
         ))}

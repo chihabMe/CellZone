@@ -26,7 +26,7 @@ export interface IMemorySize {
 }
 interface Props {
   marks: IMark[];
-  screenSize: IScreenSize[];
+  screenSizes: IScreenSize[];
   memorySizes: IMemorySize[];
   capacities: ICapacity[];
   batteryCapacities: IBatteryCapacity[];
@@ -37,14 +37,22 @@ const LeftSideFilterSearch = ({
   capacities,
   marks,
   memorySizes,
-  screenSize,
+  screenSizes,
 }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const params = new URLSearchParams(searchParams);
+  const parseValues = (key: string): string[] => {
+    const value = params.get(key);
+    if (value) {
+      return value.split("_or_");
+    }
+    return [];
+  };
+
   const handleSearch = (key: string, value: string[]) => {
-    const params = new URLSearchParams(searchParams);
-    if (value.length) {
+    if (value && value.length) {
       params.set(key, value.join("_or_"));
     } else {
       params.delete(key);
@@ -55,27 +63,36 @@ const LeftSideFilterSearch = ({
   return (
     <div className="flex flex-col space-y-2 w-[300px]">
       <Search handleSearch={handleSearch} queryKey="query" />
-      <Marks handleSearch={handleSearch} queryKey="mark" marks={marks} />
+      <Marks
+        handleSearch={handleSearch}
+        queryKey="mark"
+        marks={marks}
+        initialState={parseValues("mark")}
+      />
       <BatteryCapacities
         handleSearch={handleSearch}
         queryKey="batteryCapacity"
         capacities={batteryCapacities}
+        initialState={parseValues("batteryCapacity")}
       />
       <ScreenSizes
         handleSearch={handleSearch}
         queryKey="screenSize"
-        screenSize={screenSize}
+        screenSizes={screenSizes}
+        initialState={parseValues("screenSize")}
       />
       <MemorySizes
         handleSearch={handleSearch}
         queryKey="memorySize"
         memorySizes={memorySizes}
+        initialState={parseValues("memorySize")}
       />
 
       <Capacities
         handleSearch={handleSearch}
         queryKey="capacity"
         capacity={capacities}
+        initialState={parseValues("capacity")}
       />
     </div>
   );

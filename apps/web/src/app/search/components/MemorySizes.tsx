@@ -7,10 +7,12 @@ interface Props {
   memorySizes: IMemorySize[];
   handleSearch: (key: string, value: string[]) => void;
   queryKey: string;
+
+  initialState: string[];
 }
 
-const MemorySizes = ({ handleSearch, memorySizes, queryKey }: Props) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+const MemorySizes = ({ handleSearch,initialState, memorySizes, queryKey }: Props) => {
+  const [selectedValues, setSelectedValues] = useState<string[]>(initialState);
 
   const toggleValue = (value: string) => {
     setSelectedValues((prev) => {
@@ -35,7 +37,10 @@ const MemorySizes = ({ handleSearch, memorySizes, queryKey }: Props) => {
             key={`memory_size_${m.memory}`}
             className="flex items-center space-x-4"
           >
-            <Checkbox onClick={() => toggleValue(m.memory.toString())} />
+            <Checkbox
+            defaultChecked={initialState.includes(m.memory.toString())}
+            
+            onClick={() => toggleValue(m.memory.toString())} />
             <span>{m.memory}GB</span>
           </li>
         ))}

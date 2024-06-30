@@ -7,10 +7,12 @@ interface Props {
   marks: IMark[];
   handleSearch: (key: string, value: string[]) => void;
   queryKey: string;
+  initialState: string[];
 }
 
-const Marks = ({ marks, handleSearch, queryKey }: Props) => {
-  const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
+const Marks = ({ marks, handleSearch, queryKey, initialState }: Props) => {
+  const [selectedValues, setSelectedValues] =
+    React.useState<string[]>(initialState);
 
   const toggleValue = (value: string) => {
     setSelectedValues((prev) => {
@@ -33,8 +35,9 @@ const Marks = ({ marks, handleSearch, queryKey }: Props) => {
         {marks.map((m) => (
           <li key={m.id} className="flex space-x-4 items-center">
             <Checkbox
-              onClick={() => toggleValue(m.name.toString())}
-            />
+            defaultChecked={initialState.includes(m.name.toString())}
+            
+            onClick={() => toggleValue(m.name.toString())} />
             <div className="space-x-2 flex items-center">
               <span className="font-medium">{m.name}</span>
               <span className="text-gray-400">{m._count.Products}</span>
@@ -47,4 +50,3 @@ const Marks = ({ marks, handleSearch, queryKey }: Props) => {
 };
 
 export default Marks;
-

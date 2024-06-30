@@ -7,10 +7,11 @@ interface Props {
   capacities: IBatteryCapacity[];
   queryKey: string;
   handleSearch: (key: string, value: string[]) => void;
+  initialState: string[];
 }
 
-const BatteryCapacities = ({ capacities, handleSearch, queryKey }: Props) => {
-  const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
+const BatteryCapacities = ({ capacities, handleSearch, queryKey,initialState }: Props) => {
+  const [selectedValues, setSelectedValues] = React.useState<string[]>(initialState);
 
   const toggleValue = (value: string) => {
     setSelectedValues((prev) => {
@@ -33,6 +34,7 @@ const BatteryCapacities = ({ capacities, handleSearch, queryKey }: Props) => {
         {capacities.map((c) => (
           <li key={`battery_capacity_${c.batteryCapacity}`} className="flex items-center space-x-4">
             <Checkbox
+            defaultChecked={initialState.includes(c.batteryCapacity.toString())}
               onClick={() => toggleValue(c.batteryCapacity.toString())}
             />
             <span>{c.batteryCapacity}mAh</span>

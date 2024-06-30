@@ -11,7 +11,7 @@ import React, { ReactNode } from "react";
 import LeftSideFilterSearch from "./components/LeftSideFilterSearch";
 
 const layout = async ({ children }: { children: ReactNode }) => {
-  const screenSize = await getProductsScreenSizes();
+  const screenSizes = await getProductsScreenSizes();
   const marks = await getProductMarks();
   const memorySizes = await getMemorySizes();
   const capacities = await getCapacity();
@@ -25,7 +25,8 @@ const layout = async ({ children }: { children: ReactNode }) => {
           capacities={capacities}
           marks={marks}
           memorySizes={memorySizes}
-          screenSize={screenSize}
+          screenSizes={screenSizes}
+
         />
         {children}
       </div>
