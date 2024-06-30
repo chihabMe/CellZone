@@ -10,6 +10,7 @@ import { addToCart, likeUnlike } from "@/actions/products.actions";
 import { useAction } from "next-safe-action/hooks";
 import IProduct from "@/interfaces/IProduct";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 interface Props {
   product: IProduct;
 }
@@ -17,44 +18,46 @@ const ProductCard = (props: Props) => {
   const [isVisisble, setIsVisible] = useState(false);
 
   return (
-    <div
-      onMouseOver={() => setIsVisible(true)}
-      onMouseOut={() => setIsVisible(false)}
-      className="relative group  max-w-[300px]  flex flex-col rounded-md py-4 pt-10  bg-gray-200 items-center space-y-4"
-    >
-      <div className="flex flex-col  items-center  absolute top-2 right-2">
-        <LikeButton product={props.product} />
-        <AnimatePresence>
-          {isVisisble && (
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0.8 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0, x: 1 }}
-            >
-              <CartButton
-                className="  transition-all duration-300  "
-                product={props.product}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <Link href={`/products/${props.product.slug}`}>
+      <div
+        onMouseOver={() => setIsVisible(true)}
+        onMouseOut={() => setIsVisible(false)}
+        className="relative group  max-w-[300px]  flex flex-col rounded-md py-4 pt-10  bg-gray-200 items-center space-y-4"
+      >
+        <div className="flex flex-col  items-center  absolute top-2 right-2">
+          <LikeButton product={props.product} />
+          <AnimatePresence>
+            {isVisisble && (
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0.8 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0, x: 1 }}
+              >
+                <CartButton
+                  className="  transition-all duration-300  "
+                  product={props.product}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        <Image
+          src={props.product.image}
+          alt={props.product.name}
+          width={150}
+          height={150}
+        />
+        <div className="max-w-[240px] text-center">
+          <h3>{props.product.name}</h3>
+          <h2 className="font-medium text-xl my-2">
+            $ {props.product.price.toString()}
+          </h2>
+        </div>
+        <Button className="bg-gray-900 py-3 text-base font-medium text-gray-100">
+          Buy Now
+        </Button>
       </div>
-      <Image
-        src={props.product.image}
-        alt={props.product.name}
-        width={150}
-        height={150}
-      />
-      <div className="max-w-[240px] text-center">
-        <h3>{props.product.name}</h3>
-        <h2 className="font-medium text-xl my-2">
-          $ {props.product.price.toString()}
-        </h2>
-      </div>
-      <Button className="bg-gray-900 py-3 text-base font-medium text-gray-100">
-        Buy Now
-      </Button>
-    </div>
+    </Link>
   );
 };
 

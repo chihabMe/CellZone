@@ -4,6 +4,7 @@ import IProduct from "@/interfaces/IProduct";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { Prisma, Product } from "db";
+import { notFound } from "next/navigation";
 import { cache } from "react";
 
 // Fetch user session
@@ -150,3 +151,13 @@ export const getBatteryCapacity = cache(async () => {
     },
   });
 });
+
+export const getProductBySlug = async (slug: string) => {
+  const session = await auth();
+  const product = await db.product.findUnique({
+    where: { slug },
+  });
+  if (!product) return notFound();
+  const enhancedProduct = await enhanceProducts([product], session?.user.id);
+  return enhancedProduct[0];
+};
