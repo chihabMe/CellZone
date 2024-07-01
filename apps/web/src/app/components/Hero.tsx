@@ -23,6 +23,7 @@ const Hero = () => {
         <div>
             <Image
               src="/images/iphone.png"
+              placeholder="blur"
               alt="hero iphone image "
               className="absolute bottom-0 right-10 hidden md:block"
               width={400}

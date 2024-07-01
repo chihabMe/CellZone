@@ -42,6 +42,7 @@ const ProductCard = (props: Props) => {
           </AnimatePresence>
         </div>
         <Image
+                    placeholder="blur"
           src={props.product.image}
           alt={props.product.name}
           width={150}

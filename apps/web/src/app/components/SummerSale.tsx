@@ -7,6 +7,7 @@ const SummerSale = () => {
   return (
     <section className="container w-full flex justify-center items-center h-[500px] relative mx-auto">
       <Image
+              placeholder="blur"
         alt="summer sale image"
         layout="fill"
         src="/images/footer-banner.png"

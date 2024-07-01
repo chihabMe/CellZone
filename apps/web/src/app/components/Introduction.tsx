@@ -7,10 +7,10 @@ const Introduction = () => {
   return (
     <section className="bg-[#EDEDED]">
       <div className="container flex flex-col lg:flex-row   mx-auto ">
-        
         <div className="w-full lg:w-1/2 ">
           <div className="flex min-h-[220px] px-4 md:px-0  bg-white  justify-between items-center">
             <Image
+              placeholder="blur"
               src={"/images/playstation.png"}
               alt="playstation"
               className=" !w-[150px] !h-[150px] md:w-[350px] md:h-[350px]"
@@ -18,7 +18,9 @@ const Introduction = () => {
               height={350}
             />
             <div className="max-w-[400px] flex flex-col space-y-4">
-              <h2 className="text-black font-medium text-2xl md:text-4xl">Playstation 5</h2>
+              <h2 className="text-black font-medium text-2xl md:text-4xl">
+                Playstation 5
+              </h2>
               <p className="text-gray-500 font-medium">
                 Incredibly powerful CPUs, GPUs, and an SSD with integrated I/O
                 will redefine your PlayStation experience.
@@ -29,6 +31,7 @@ const Introduction = () => {
           <div className="flex   ">
             <div className="w-full md:w-1/2 bg-[#EDEDED] relative flex justify-center items-center ">
               <Image
+                placeholder="blur"
                 src={"/images/headphone.png"}
                 alt="head phone"
                 className="absolute left-0 hidden sm:block -translate-y-1/2 top-1/2 "
@@ -47,6 +50,7 @@ const Introduction = () => {
             </div>
             <div className="w-full md:w-1/2 relative flex h-[250px] items-center justify-center  bg-[#353535]">
               <Image
+                placeholder="blur"
                 src={"/images/buds.png"}
                 className="absolute hidden sm:block left-0 -translate-y-1/2 top-1/2 "
                 alt="buds"
@@ -69,7 +73,7 @@ const Introduction = () => {
           <div className="w-[400px] lg:max-w-[400px] lg:mr-20 space-y-1">
             <h1 className="font-thin text-6xl ">MACBOOK</h1>
             <h1 className="font-medium text-6xl">AIR</h1>
-            <p className="text-gray-400 font-medium my-2" >
+            <p className="text-gray-400 font-medium my-2">
               The new 15‑inch MacBook Air makes room for more of what you love
               with a spacious Liquid Retina display.
             </p>
@@ -80,6 +84,7 @@ const Introduction = () => {
             </Link>
           </div>
           <Image
+            placeholder="blur"
             className="absolute hidden md:block right-0 top-1/2 -translate-y-1/2"
             src={"/images/macbook.png"}
             alt="iphone"
