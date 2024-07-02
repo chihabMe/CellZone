@@ -11,6 +11,7 @@ import { useAction } from "next-safe-action/hooks";
 import IProduct from "@/interfaces/IProduct";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
+import { getBase64 } from "@/lib/images";
 interface Props {
   product: IProduct;
 }
@@ -42,7 +43,6 @@ const ProductCard = (props: Props) => {
           </AnimatePresence>
         </div>
         <Image
-                    placeholder="blur"
           src={props.product.image}
           alt={props.product.name}
           width={150}

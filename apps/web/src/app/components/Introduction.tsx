@@ -2,18 +2,22 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import PlayStationImage from "/public/images/playstation.png";
+import HeadPhoneImage from "/public/images/headphone.png";
+import BudsImage from "/public/images/buds.png";
+import MacBookImage from "/public/images/macbook.png";
 
 const Introduction = () => {
   return (
     <section className="bg-[#EDEDED]">
-      <div className="container flex flex-col lg:flex-row   mx-auto ">
-        <div className="w-full lg:w-1/2 ">
-          <div className="flex min-h-[220px] px-4 md:px-0  bg-white  justify-between items-center">
+      <div className="container flex flex-col lg:flex-row mx-auto">
+        <div className="w-full lg:w-1/2">
+          <div className="flex min-h-[220px] px-4 md:px-0 bg-white justify-between items-center">
             <Image
               placeholder="blur"
-              src={"/images/playstation.png"}
+              src={PlayStationImage}
               alt="playstation"
-              className=" !w-[150px] !h-[150px] md:w-[350px] md:h-[350px]"
+              className="!w-[150px] !h-[150px] md:w-[350px] md:h-[350px]"
               width={350}
               height={350}
             />
@@ -28,31 +32,30 @@ const Introduction = () => {
             </div>
           </div>
 
-          <div className="flex   ">
-            <div className="w-full md:w-1/2 bg-[#EDEDED] relative flex justify-center items-center ">
+          <div className="flex">
+            <div className="w-full md:w-1/2 bg-[#EDEDED] relative flex justify-center items-center">
               <Image
                 placeholder="blur"
-                src={"/images/headphone.png"}
-                alt="head phone"
-                className="absolute left-0 hidden sm:block -translate-y-1/2 top-1/2 "
+                src={HeadPhoneImage}
+                alt="headphone"
+                className="absolute left-0 hidden sm:block -translate-y-1/2 top-1/2"
                 width={80}
                 height={80}
               />
               <div className="max-w-[200px] ml-10">
                 <h2 className="text-gray-800 text-2xl">Apple</h2>
-                <h2 className="text-gray-800 text-2xl">AirPods </h2>
-
+                <h2 className="text-gray-800 text-2xl">AirPods</h2>
                 <h2 className="text-gray-800 text-2xl font-bold">Max</h2>
                 <p className="text-gray-600">
                   Computational audio. Listen, its powerful
                 </p>
               </div>
             </div>
-            <div className="w-full md:w-1/2 relative flex h-[250px] items-center justify-center  bg-[#353535]">
+            <div className="w-full md:w-1/2 relative flex h-[250px] items-center justify-center bg-[#353535]">
               <Image
                 placeholder="blur"
-                src={"/images/buds.png"}
-                className="absolute hidden sm:block left-0 -translate-y-1/2 top-1/2 "
+                src={BudsImage}
+                className="absolute hidden sm:block left-0 -translate-y-1/2 top-1/2"
                 alt="buds"
                 width={100}
                 height={100}
@@ -60,7 +63,7 @@ const Introduction = () => {
               <div className="max-w-[180px] ml-8 flex flex-col space-y-1">
                 <h2 className="text-gray-100 text-3xl">Apple</h2>
                 <h2 className="text-gray-100 text-3xl">
-                  Vision<span className="font-bold text-white"> Pro</span>{" "}
+                  Vision<span className="font-bold text-white"> Pro</span>
                 </h2>
                 <p className="text-gray-300">
                   An immersive way to experience entertainment
@@ -71,7 +74,7 @@ const Introduction = () => {
         </div>
         <div className="w-full px-4 lg:w-1/2 flex items-center h-[400px] lg:h-auto lg:justify-center bg-[#EDEDED] relative">
           <div className="w-[400px] lg:max-w-[400px] lg:mr-20 space-y-1">
-            <h1 className="font-thin text-6xl ">MACBOOK</h1>
+            <h1 className="font-thin text-6xl">MACBOOK</h1>
             <h1 className="font-medium text-6xl">AIR</h1>
             <p className="text-gray-400 font-medium my-2">
               The new 15‑inch MacBook Air makes room for more of what you love
@@ -86,8 +89,8 @@ const Introduction = () => {
           <Image
             placeholder="blur"
             className="absolute hidden md:block right-0 top-1/2 -translate-y-1/2"
-            src={"/images/macbook.png"}
-            alt="iphone"
+            src={MacBookImage}
+            alt="macbook"
             width={250}
             height={250}
           />

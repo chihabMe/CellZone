@@ -12,7 +12,7 @@ const ProductInfos = ({ product }: Props) => {
     <section className="w-1/2 flex justify-center  container mx-auto">
       <div>
         <Image
-              placeholder="blur"
+          // placeholder="blur"
           src={product.image}
           alt={product.name}
           width={300}
@@ -57,7 +57,7 @@ export const ProductInfo = ({
 }) => {
   return (
     <div className="flex items-center">
-      <Image src={image} placeholder="blur" alt={text} width={20} height={20} />
+      <Image src={image}  alt={text} width={20} height={20} />
       <div>
         <span className="text-gray-400">{text}</span>
         <span className="text-gray-600">{value}</span>

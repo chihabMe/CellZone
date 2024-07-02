@@ -2,15 +2,16 @@ import Button from "@/components/ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import FooterBanner from "/public/images/footer-banner.png";
 
 const SummerSale = () => {
   return (
     <section className="container w-full flex justify-center items-center h-[500px] relative mx-auto">
       <Image
-              placeholder="blur"
+        placeholder="blur"
         alt="summer sale image"
         layout="fill"
-        src="/images/footer-banner.png"
+        src={FooterBanner}
       />
       <div className="z-10 flex flex-col items-center space-y-4">
         <h1 className="text-7xl text-white  ">

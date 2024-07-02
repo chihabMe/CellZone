@@ -42,7 +42,7 @@ const PopularProductItem = (props: {
       )}
     >
       <Image
-              placeholder="blur"
+        // placeholder="blur"
         src={props.product.image}
         alt={`${props.product.name} image`}
         width={180}

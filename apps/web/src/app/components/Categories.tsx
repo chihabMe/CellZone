@@ -42,7 +42,7 @@ const CategoryItem = (props: { name: string; image: string; href: string }) => {
     <li className="cursor-pointer bg-gray-200 rounded-xl p-6">
       <Link href={props.href}>
         <div className="flex flex-col space-y-3 justify-center items-center">
-          <Image src={props.image} placeholder="blur" alt={props.name} width={50} height={50} />
+          <Image src={props.image} placeholder="empty" alt={props.name} width={50} height={50} />
           <span className="font-medium capitalize">{props.name}</span>
         </div>
       </Link>
