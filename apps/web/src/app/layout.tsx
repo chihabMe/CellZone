@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import SessionLayout from "../layout/SessionLayout";
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer";
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from "nextjs-toploader";
+import Wrappers from "@/components/layout/Wrappers";
 import "./globals.css";
 import "./globals.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-loading-skeleton/dist/skeleton.css";
-
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -27,8 +27,10 @@ export default function RootLayout({
         <body>
           <NextTopLoader />
 
-          <Header />
-          {children}
+          <Wrappers>
+            <Header />
+            {children}
+          </Wrappers>
           <Footer />
         </body>
       </html>

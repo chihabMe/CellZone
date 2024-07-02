@@ -1,5 +1,10 @@
 import { Context, Env } from "hono";
 
+
+export const addToCartController = async (C:Context<Env>)=>{
+
+}
+
 export const getAllProductsController = async (c: Context<Env>) => {
   const products = await c.get("db").product.findMany({
     orderBy: {

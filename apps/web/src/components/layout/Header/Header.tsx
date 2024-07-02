@@ -10,6 +10,7 @@ import UserAvatar from "./UserAvatar";
 import Link from "next/link";
 import HeaderCart from "./HeaderCart";
 import HeaderFavorites from "./HeaderFavorites";
+import { getProductsInCart, getProductsInCartCount } from "@/data/products.data";
 
 const links = [
   { text: "Home", href: "/" },
@@ -17,7 +18,9 @@ const links = [
   { text: "Contact us", href: "/contact" },
   { text: "Blog", href: "/blog" },
 ];
-const Header = () => {
+const Header = async () => {
+  // const inCartCount = await getProductsInCartCount();
+  // console.log("count",inCartCount)
   return (
     <header className="flex container mx-auto items-center justify-between py-4">
       <div className="flex space-x-14 items-center">
