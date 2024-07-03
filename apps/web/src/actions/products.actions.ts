@@ -6,9 +6,11 @@ import { protectedActionClient } from "@/lib/next-safe-actions";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
+// Add to Cart Schema and Action
 const AddToCartSchema = z.object({
   productId: z.string().cuid(),
 });
+
 export const addToCart = protectedActionClient
   .schema(AddToCartSchema)
   .action(async ({ ctx: { session, db }, parsedInput }) => {
@@ -25,9 +27,9 @@ export const addToCart = protectedActionClient
         userId: session.user?.id,
       },
       include: {
-        products: {
+        items: {
           select: {
-            id: true,
+            productId: true,
           },
         },
       },
@@ -38,9 +40,9 @@ export const addToCart = protectedActionClient
       await db.cart.create({
         data: {
           userId: session.user.id,
-          products: {
-            connect: {
-              id: parsedInput.productId,
+          items: {
+            create: {
+              productId: parsedInput.productId,
             },
           },
         },
@@ -49,43 +51,32 @@ export const addToCart = protectedActionClient
       return { inCart: true };
     }
 
-    const productInCart = cart.products.some(
-      (product) => product.id === parsedInput.productId
+    const productInCart = cart.items.some(
+      (item) => item.productId === parsedInput.productId
     );
 
     if (productInCart) {
-      await db.cart.update({
+      await db.cartItem.deleteMany({
         where: {
-          id: cart.id,
-        },
-        data: {
-          products: {
-            disconnect: {
-              id: parsedInput.productId,
-            },
-          },
+          cartId: cart.id,
+          productId: parsedInput.productId,
         },
       });
-      // revalidatePath("/");
+      revalidatePath("/");
       return { inCart: false };
     } else {
-      await db.cart.update({
-        where: {
-          id: cart.id,
-        },
+      await db.cartItem.create({
         data: {
-          products: {
-            connect: {
-              id: parsedInput.productId,
-            },
-          },
+          cartId: cart.id,
+          productId: parsedInput.productId,
         },
       });
+      revalidatePath("/");
+      return { inCart: true };
     }
-    // revalidatePath("/");
-    return { inCart: true };
   });
 
+// Like/Unlike Schema and Action
 const LikeUnlikeSchema = z.object({
   productId: z.string().cuid(),
 });
@@ -93,7 +84,7 @@ const LikeUnlikeSchema = z.object({
 export const likeUnlike = protectedActionClient
   .schema(LikeUnlikeSchema)
   .action(async ({ ctx: { session, db }, parsedInput: { productId } }) => {
-    const likedProducts = await db.user.findFirst({
+    const user = await db.user.findUnique({
       where: {
         id: session.user?.id,
       },
@@ -106,12 +97,12 @@ export const likeUnlike = protectedActionClient
       },
     });
 
-    if (!likedProducts) {
-      return { error: "Liked products not found" };
-    }
-    const isLiked = likedProducts.LikedProducts.some(
+    if (!user) return { error: "User not found" };
+
+    const isLiked = user.LikedProducts.some(
       (product) => product.id === productId
     );
+
     if (isLiked) {
       await db.user.update({
         where: {
@@ -125,7 +116,7 @@ export const likeUnlike = protectedActionClient
           },
         },
       });
-      // revalidatePath("/");
+      revalidatePath("/");
       return { liked: false };
     } else {
       await db.user.update({
@@ -140,7 +131,7 @@ export const likeUnlike = protectedActionClient
           },
         },
       });
+      revalidatePath("/");
+      return { liked: true };
     }
-    // revalidatePath("/");
-    return { liked: true };
   });

@@ -23,10 +23,14 @@ const fetchCartProducts = async (userId: string) => {
   const cart = await db.cart.findFirst({
     where: { userId },
     select: {
-      products: true,
+      items: {
+        select: {
+          product: true,
+        },
+      },
     },
   });
-  return cart?.products || [];
+  return cart?.items.map(item => item.product) || [];
 };
 
 // Check if a product is liked
@@ -56,16 +60,6 @@ export const getProducts = cache(
     const session = await auth();
     const products = await db.product.findMany(args);
 
-    // if (!session) {
-    //   // Return products without liked and inCart information
-    //   return products.map((p) => ({
-    //     ...p,
-    //     liked: false,
-    //     inCart: false,
-    //   }));
-    // }
-
-    // Enhance products with liked and inCart information
     return enhanceProducts(products, session?.user.id);
   }
 );
@@ -75,7 +69,6 @@ export const getLikedProducts = cache(async (): Promise<IProduct[]> => {
   if (!session) return [];
   const likedProducts = await fetchLikedProducts(session.user.id);
 
-  // Enhance liked products with inCart information
   return enhanceProducts(likedProducts, session.user.id);
 });
 
@@ -86,6 +79,9 @@ export const getLikedCount = cache(async () => {
 
 export const getPopularProducts = cache(() =>
   getProducts({
+    where: {
+      isPopular: true,
+    },
     take: 4,
   })
 );
@@ -94,7 +90,7 @@ export const getProductsInCart = cache(async () => {
   const session = await auth();
   if (!session) return [];
   const cartProducts = await fetchCartProducts(session.user.id);
-  // Enhance cart products with liked information
+
   return enhanceProducts(cartProducts, session.user.id);
 });
 
@@ -102,6 +98,7 @@ export const getProductsInCartCount = cache(async () => {
   const products = await getProductsInCart();
   return products.length;
 });
+
 export const getProductsScreenSizes = cache(async () => {
   return db.product.findMany({
     distinct: ["screenSize"],
