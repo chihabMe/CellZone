@@ -5,11 +5,13 @@ interface UiContextType {
   showCart: boolean;
   openCart: () => void;
   closeCart: () => void;
+  toggleCart: () => void;
 }
 const initialState: UiContextType = {
   showCart: false,
   closeCart: () => {},
   openCart: () => {},
+  toggleCart: () => {},
 };
 export const uiContext = createContext<UiContextType>(initialState);
 
@@ -18,9 +20,10 @@ export const UiProvider = ({ children }: { children: ReactNode }) => {
 
   const openCart = () => setShowCart(true);
   const closeCart = () => setShowCart(false);
+  const toggleCart = () => setShowCart((p) => !p);
 
   return (
-    <uiContext.Provider value={{ showCart, openCart, closeCart }}>
+    <uiContext.Provider value={{ showCart, openCart, closeCart,toggleCart }}>
       {children}
     </uiContext.Provider>
   );

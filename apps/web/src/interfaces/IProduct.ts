@@ -1,6 +1,6 @@
 import { Product } from "db";
 
 export default interface IProduct extends Product {
-  liked?: boolean;
-  inCart?: boolean;
+  liked: boolean;
+  inCart: boolean;
 }
