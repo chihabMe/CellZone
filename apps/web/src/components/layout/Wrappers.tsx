@@ -1,17 +1,19 @@
 "use client";
-import React, { ReactNode } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useUi } from "@/hooks/useUi";
+import CartSidebar from "./CartSideBart";
+import { ReactNode } from "react";
 
-export const queryClient = new QueryClient();
 const Wrappers = ({ children }: { children: ReactNode }) => {
+  const { closeCart, openCart, showCart } = useUi();
+  console.log("show cart",showCart)
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       {children}
-
+      <CartSidebar isVisible={showCart} onClose={closeCart} />
       <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    </>
   );
 };
 

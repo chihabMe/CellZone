@@ -47,7 +47,7 @@ export const addToCart = protectedActionClient
           },
         },
       });
-      revalidatePath("/");
+      // revalidatePath("/");
       return { inCart: true };
     }
 
@@ -62,7 +62,7 @@ export const addToCart = protectedActionClient
           productId: parsedInput.productId,
         },
       });
-      revalidatePath("/");
+      // revalidatePath("/");
       return { inCart: false };
     } else {
       await db.cartItem.create({
@@ -71,7 +71,7 @@ export const addToCart = protectedActionClient
           productId: parsedInput.productId,
         },
       });
-      revalidatePath("/");
+      // revalidatePath("/");
       return { inCart: true };
     }
   });
@@ -116,7 +116,7 @@ export const likeUnlike = protectedActionClient
           },
         },
       });
-      revalidatePath("/");
+      // revalidatePath("/");
       return { liked: false };
     } else {
       await db.user.update({
@@ -131,7 +131,7 @@ export const likeUnlike = protectedActionClient
           },
         },
       });
-      revalidatePath("/");
+      // revalidatePath("/");
       return { liked: true };
     }
   });

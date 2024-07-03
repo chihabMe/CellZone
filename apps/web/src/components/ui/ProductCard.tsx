@@ -3,14 +3,15 @@ import { HeartIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as FilledHeartIcon } from "@heroicons/react/24/solid";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { addToCart, likeUnlike } from "@/actions/products.actions";
 import { useAction } from "next-safe-action/hooks";
 import IProduct from "@/interfaces/IProduct";
 import { twMerge } from "tailwind-merge";
-import { queryClient } from "../layout/Wrappers";
 import Link from "next/link";
+import { queryClient } from "../layout/ContextProviders";
+import { useUi } from "@/hooks/useUi";
 
 interface Props {
   product: IProduct;
@@ -57,6 +58,7 @@ const ProductCard = (props: Props) => {
 
 const CartButton = (props: { className?: string; product: IProduct }) => {
   const [isInCart, setIsInCart] = useState(props.product.inCart);
+  const { openCart } = useUi();
 
   const handleAddToCart = async () => {
     await queryClient.cancelQueries({ queryKey: ["cart_count"] });
@@ -66,8 +68,8 @@ const CartButton = (props: { className?: string; product: IProduct }) => {
     setIsInCart((prev) => !prev);
     await addToCart({ productId: props.product.id });
     queryClient.invalidateQueries({ queryKey: ["cart_count"] });
+    openCart();
   };
-
 
   return (
     <div
