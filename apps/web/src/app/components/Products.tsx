@@ -66,7 +66,7 @@ const ProductsList = async (props: {
       <div className=" px-2 container mx-auto max-w-screen-xl gap-4 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product, idx) => (
           <ClientMotion key={"home_product_card_" + product.id} idx={idx}>
-            <ProductCard key={product.id} product={product} />
+            <ProductCard  key={product.id} product={product} />
           </ClientMotion>
         ))}
       </div>
