@@ -7,7 +7,7 @@ import {
   getProductsScreenSizes,
 } from "@/data/products.data";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import React, { ReactNode } from "react";
+import React, { ReactNode, Suspense } from "react";
 import LeftSideFilterSearch from "./components/LeftSideFilterSearch";
 
 const layout = async ({ children }: { children: ReactNode }) => {
@@ -20,14 +20,15 @@ const layout = async ({ children }: { children: ReactNode }) => {
   return (
     <main className="flex min-h-screen  px-4 justify-between pt-10">
       <div className="container  flex mx-auto  space-x-8">
-        <LeftSideFilterSearch
-          batteryCapacities={batteryCapacities}
-          capacities={capacities}
-          marks={marks}
-          memorySizes={memorySizes}
-          screenSizes={screenSizes}
-
-        />
+        <Suspense>
+          <LeftSideFilterSearch
+            batteryCapacities={batteryCapacities}
+            capacities={capacities}
+            marks={marks}
+            memorySizes={memorySizes}
+            screenSizes={screenSizes}
+          />
+        </Suspense>
         {children}
       </div>
     </main>

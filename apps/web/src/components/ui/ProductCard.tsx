@@ -68,7 +68,9 @@ const CartButton = (props: { className?: string; product: IProduct }) => {
     setIsInCart((prev) => !prev);
     await addToCart({ productId: props.product.id });
     queryClient.invalidateQueries({ queryKey: ["cart_count"] });
+    await queryClient.invalidateQueries({ queryKey: ["cart_items"] });
     openCart();
+
   };
 
   return (
