@@ -19,8 +19,6 @@ const links = [
   { text: "Blog", href: "/blog" },
 ];
 const Header = async () => {
-  // const inCartCount = await getProductsInCartCount();
-  // console.log("count",inCartCount)
   return (
     <header className="flex container mx-auto items-center justify-between py-4">
       <div className="flex space-x-14 items-center">
