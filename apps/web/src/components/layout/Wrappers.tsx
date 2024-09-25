@@ -7,7 +7,6 @@ import { ReactNode } from "react";
 
 const Wrappers = ({ children }: { children: ReactNode }) => {
   const { closeCart, openCart, showCart } = useUi();
-  console.log("show cart",showCart)
   return (
     <>
       {children}
